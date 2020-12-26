@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Comment: Decodable {
+struct CommentAPIResponse: Decodable {
     let postID: Int
     let commentID: Int
     let name: String
@@ -21,7 +21,7 @@ struct Comment: Decodable {
     }
 }
 
-struct CommentRequest: Encodable {
+struct CommentAPIRequest: Encodable {
     let postID: Int
     
     enum CodingKeys: String, CodingKey {

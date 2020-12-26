@@ -11,9 +11,9 @@ import Moya
 typealias ResponseHandler<ResponseType: Decodable> = (Result<ResponseType, APIError>) -> Void
 
 protocol APILayerInterface: AnyObject {
-    func getUsers(completion: @escaping ResponseHandler<[User]>)
-    func getPosts(completion: @escaping ResponseHandler<[Post]>)
-    func getComments(commentRequest: CommentRequest, completion: @escaping ResponseHandler<[Comment]>)
+    func getUsers(completion: @escaping ResponseHandler<[UserAPIResponse]>)
+    func getPosts(completion: @escaping ResponseHandler<[PostAPIResponse]>)
+    func getComments(commentRequest: CommentAPIRequest, completion: @escaping ResponseHandler<[CommentAPIResponse]>)
 }
 
 final class APILayer: APILayerInterface {
@@ -24,21 +24,21 @@ final class APILayer: APILayerInterface {
         self.apiResponseHandler = apiResponseHandler
     }
     
-    func getUsers(completion: @escaping ResponseHandler<[User]>) {
+    func getUsers(completion: @escaping ResponseHandler<[UserAPIResponse]>) {
         socialMediaAPI.request(.users,
                                completion: apiResponseHandler.handleResponse(with: completion,
-                                                                             responseType: [User].self))
+                                                                             responseType: [UserAPIResponse].self))
     }
     
-    func getPosts(completion: @escaping ResponseHandler<[Post]>) {
+    func getPosts(completion: @escaping ResponseHandler<[PostAPIResponse]>) {
         socialMediaAPI.request(.posts,
                                completion: apiResponseHandler.handleResponse(with: completion,
-                                                                             responseType: [Post].self))
+                                                                             responseType: [PostAPIResponse].self))
     }
     
-    func getComments(commentRequest: CommentRequest, completion: @escaping ResponseHandler<[Comment]>) {
+    func getComments(commentRequest: CommentAPIRequest, completion: @escaping ResponseHandler<[CommentAPIResponse]>) {
         socialMediaAPI.request(.comments(postID: commentRequest.postID),
                                completion: apiResponseHandler.handleResponse(with: completion,
-                                                                             responseType: [Comment].self))
+                                                                             responseType: [CommentAPIResponse].self))
     }
 }

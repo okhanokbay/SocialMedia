@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Post: Decodable {
+struct PostAPIResponse: Decodable {
     let userID: Int
     let postID: Int
     let title: String
