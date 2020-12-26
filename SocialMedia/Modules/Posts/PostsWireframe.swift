@@ -13,9 +13,9 @@ import UIKit
 final class PostsWireframe: BaseWireframe {
 
     // MARK: - Module setup -
-
+    
     init() {
-        let moduleViewController = PostsViewController()
+        let moduleViewController = PostsViewController.loadFromNib()
         super.init(viewController: moduleViewController)
 
         let interactor = PostsInteractor()
