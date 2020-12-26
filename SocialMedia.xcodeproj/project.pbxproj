@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1621E8CE25976E6E004A117F /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 1621E8CD25976E6E004A117F /* Moya */; };
 		16BB018F259752F800C2B48D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB018E259752F800C2B48D /* AppDelegate.swift */; };
 		16BB0191259752F800C2B48D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB0190259752F800C2B48D /* SceneDelegate.swift */; };
 		16BB0193259752F800C2B48D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB0192259752F800C2B48D /* ViewController.swift */; };
@@ -97,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1621E8CE25976E6E004A117F /* Moya in Frameworks */,
 				16BB026225975F9900C2B48D /* NVActivityIndicatorView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,6 +282,7 @@
 			name = SocialMedia;
 			packageProductDependencies = (
 				16BB026125975F9900C2B48D /* NVActivityIndicatorView */,
+				1621E8CD25976E6E004A117F /* Moya */,
 			);
 			productName = SocialMedia;
 			productReference = 16BB018B259752F800C2B48D /* SocialMedia.app */;
@@ -354,6 +357,7 @@
 			mainGroup = 16BB0182259752F800C2B48D;
 			packageReferences = (
 				16BB026025975F9900C2B48D /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
+				1621E8CC25976E6E004A117F /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			productRefGroup = 16BB018C259752F800C2B48D /* Products */;
 			projectDirPath = "";
@@ -755,6 +759,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1621E8CC25976E6E004A117F /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 14.0.0;
+			};
+		};
 		16BB026025975F9900C2B48D /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ninjaprox/NVActivityIndicatorView";
@@ -766,6 +778,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1621E8CD25976E6E004A117F /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1621E8CC25976E6E004A117F /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
 		16BB026125975F9900C2B48D /* NVActivityIndicatorView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 16BB026025975F9900C2B48D /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
