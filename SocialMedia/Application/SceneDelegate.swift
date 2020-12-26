@@ -13,11 +13,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     guard let windowScene = (scene as? UIWindowScene) else { return }
     
-    window = UIWindow(windowScene: windowScene)
-    
     let postsNavigationController = PostsNavigationController()
     postsNavigationController.setRootWireframe(PostsWireframe())
     
+    window = UIWindow(windowScene: windowScene)
     window?.rootViewController = postsNavigationController
     window?.makeKeyAndVisible()
   }
