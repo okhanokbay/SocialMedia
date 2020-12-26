@@ -13,5 +13,3 @@ struct Strings {
         case ok = "OK"
     }
 }
- 
- 

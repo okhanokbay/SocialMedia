@@ -31,15 +31,14 @@ final class CoreDataStack {
     }
     
     @objc func sceneDidEnterBackground() {
-        CoreDataStack.shared.saveContext()
+        CoreDataStack.shared.save(context: persistentContainer.viewContext)
     }
 }
 
 // MARK: - Core Data Saving support
 
 extension CoreDataStack {
-    func saveContext () {
-        let context = persistentContainer.viewContext
+    func save(context: NSManagedObjectContext) {
         if context.hasChanges {
             do {
                 try context.save()
@@ -57,39 +56,59 @@ extension CoreDataStack {
 // MARK: Core Data Helper Methods
 
 extension CoreDataStack: PersistenceLayerInterface {
-    func fetchPosts() -> [PostMediationProtocol] {
+    func fetchPosts(completion: @escaping ([PostMediationProtocol]) -> Void) {
         let request = Post.createFetchRequest()
-        return (try? persistentContainer.viewContext.fetch(request)) ?? []
-    }
-    
-    func save(posts: [PostMediationProtocol]) {
-        posts.forEach { post in
-            let managedPost = Post(context: persistentContainer.viewContext)
-            managedPost.postID = post.postID
-            managedPost.title = post.title
-            managedPost.body = post.body
-            managedPost.name = post.name
-            managedPost.username = post.username
-            
-            managedPost.comments = Set(post.allComments.map { comment in
-                let managedComment = Comment(context: persistentContainer.viewContext)
-                managedComment.postID = comment.postID
-                managedComment.commentID = comment.commentID
-                managedComment.name = comment.name
-                managedComment.email = comment.email
-                managedComment.body = comment.body
-                managedComment.inPost = managedPost
-                return managedComment
-            })
+        persistentContainer.performBackgroundTask { [weak self] backgroundContext in
+            guard let self = self else { return }
+            completion((try? self.persistentContainer.viewContext.fetch(request)) ?? [])
         }
-        
-        saveContext()
     }
     
-    func fetchComments(for postID: Int) -> [CommentMediationProtocol] {
+    func save(posts: [PostMediationProtocol],
+              completion: ((_ isSuccess: Bool) -> Void)? = nil) {
+        
+        persistentContainer.performBackgroundTask { [weak self] backgroundContext in
+            guard let self = self else { return }
+            
+            posts.forEach { post in
+                Post.makeSelf(from: post, context: backgroundContext)
+            }
+            
+            self.save(context: backgroundContext)
+        }
+    }
+    
+    func update(post: PostMediationProtocol,
+                with comments: [CommentMediationProtocol],
+                completion: ((_ isSuccess: Bool) -> Void)? = nil) {
+        
+        let request = Post.createFetchRequest()
+        let predicate = NSPredicate(format: "postID = %@", post.postID)
+        request.predicate = predicate
+        
+        persistentContainer.performBackgroundTask { backgroundContext in
+            if let managedPost = try? backgroundContext.fetch(request).first {
+                let oldPost = Post.makeSelf(from: post, context: backgroundContext)
+                
+                managedPost.comments = Set(comments.map { Comment.makeSelf(from: $0,
+                                                                       in: oldPost,
+                                                                       context: backgroundContext) })
+                completion?(true)
+                
+            } else {
+                completion?(false)
+            }
+        }
+    }
+    
+    func fetchComments(for postID: Int, completion: (([CommentMediationProtocol]) -> Void)? = nil) {
         let request = Comment.createFetchRequest()
         let predicate = NSPredicate(format: "postID = %@", postID)
         request.predicate = predicate
-        return (try? persistentContainer.viewContext.fetch(request)) ?? []
+        
+        persistentContainer.performBackgroundTask { backgroundContext in
+            let managedObjects = try? backgroundContext.fetch(request)
+            completion?(managedObjects ?? [])
+        }
     }
 }

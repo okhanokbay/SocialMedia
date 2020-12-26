@@ -43,4 +43,21 @@ extension Post: PostMediationProtocol {
     var allComments: [CommentMediationProtocol] {
         return Array(comments)
     }
+    
+    @discardableResult
+    static func makeSelf(from post: PostMediationProtocol, context: NSManagedObjectContext) -> Post {
+        let managedPost = Post(context: context)
+        
+        managedPost.postID = post.postID
+        managedPost.title = post.title
+        managedPost.body = post.body
+        managedPost.name = post.name
+        managedPost.username = post.username
+        
+        managedPost.comments = Set(post.allComments.map { comment in
+            return Comment.makeSelf(from: comment, in: managedPost, context: context)
+        })
+        
+        return managedPost
+    }
 }

@@ -8,7 +8,14 @@
 import Foundation
 
 protocol PersistenceLayerInterface: AnyObject {
-    func fetchPosts() -> [PostMediationProtocol]
-    func save(posts: [PostMediationProtocol])
-    func fetchComments(for postID: Int) -> [CommentMediationProtocol]
+    func fetchPosts(completion: @escaping ([PostMediationProtocol]) -> Void)
+    
+    func save(posts: [PostMediationProtocol],
+              completion: ((_ isSuccess: Bool) -> Void)?)
+    
+    func update(post: PostMediationProtocol,
+                with comments: [CommentMediationProtocol],
+                completion: ((_ isSuccess: Bool) -> Void)?)
+    
+    func fetchComments(for postID: Int, completion: (([CommentMediationProtocol]) -> Void)?)
 }
