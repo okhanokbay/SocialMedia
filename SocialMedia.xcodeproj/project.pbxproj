@@ -16,6 +16,7 @@
 		16BB019E259752F900C2B48D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16BB019C259752F900C2B48D /* LaunchScreen.storyboard */; };
 		16BB01A9259752FA00C2B48D /* SocialMediaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB01A8259752FA00C2B48D /* SocialMediaTests.swift */; };
 		16BB01B4259752FA00C2B48D /* SocialMediaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB01B3259752FA00C2B48D /* SocialMediaUITests.swift */; };
+		16BB02242597550200C2B48D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 16BB02232597550200C2B48D /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		16BB01AF259752FA00C2B48D /* SocialMediaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SocialMediaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		16BB01B3259752FA00C2B48D /* SocialMediaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaUITests.swift; sourceTree = "<group>"; };
 		16BB01B5259752FA00C2B48D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		16BB02232597550200C2B48D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 		16BB0182259752F800C2B48D = {
 			isa = PBXGroup;
 			children = (
+				16BB02232597550200C2B48D /* .gitignore */,
 				16BB018D259752F800C2B48D /* SocialMedia */,
 				16BB01A7259752FA00C2B48D /* SocialMediaTests */,
 				16BB01B2259752FA00C2B48D /* SocialMediaUITests */,
@@ -234,6 +237,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16BB02242597550200C2B48D /* .gitignore in Resources */,
 				16BB019E259752F900C2B48D /* LaunchScreen.storyboard in Resources */,
 				16BB019B259752F900C2B48D /* Assets.xcassets in Resources */,
 				16BB0196259752F800C2B48D /* Main.storyboard in Resources */,
