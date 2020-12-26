@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,25 @@
 		16BB01A9259752FA00C2B48D /* SocialMediaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB01A8259752FA00C2B48D /* SocialMediaTests.swift */; };
 		16BB01B4259752FA00C2B48D /* SocialMediaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB01B3259752FA00C2B48D /* SocialMediaUITests.swift */; };
 		16BB02242597550200C2B48D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 16BB02232597550200C2B48D /* .gitignore */; };
+		16BB023625975D7C00C2B48D /* PostsInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB023025975D7C00C2B48D /* PostsInterfaces.swift */; };
+		16BB023725975D7C00C2B48D /* PostsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB023125975D7C00C2B48D /* PostsPresenter.swift */; };
+		16BB023825975D7C00C2B48D /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB023225975D7C00C2B48D /* PostsViewController.swift */; };
+		16BB023925975D7C00C2B48D /* PostsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB023325975D7C00C2B48D /* PostsInteractor.swift */; };
+		16BB023A25975D7C00C2B48D /* PostsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16BB023425975D7C00C2B48D /* PostsViewController.xib */; };
+		16BB023B25975D7C00C2B48D /* PostsWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB023525975D7C00C2B48D /* PostsWireframe.swift */; };
+		16BB024825975D8A00C2B48D /* PostDetailInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB024225975D8A00C2B48D /* PostDetailInterfaces.swift */; };
+		16BB024925975D8A00C2B48D /* PostDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB024325975D8A00C2B48D /* PostDetailPresenter.swift */; };
+		16BB024A25975D8A00C2B48D /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB024425975D8A00C2B48D /* PostDetailViewController.swift */; };
+		16BB024B25975D8A00C2B48D /* PostDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB024525975D8A00C2B48D /* PostDetailInteractor.swift */; };
+		16BB024C25975D8A00C2B48D /* PostDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16BB024625975D8A00C2B48D /* PostDetailViewController.xib */; };
+		16BB024D25975D8A00C2B48D /* PostDetailWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB024725975D8A00C2B48D /* PostDetailWireframe.swift */; };
+		16BB025725975DE600C2B48D /* BaseWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB025225975DE600C2B48D /* BaseWireframe.swift */; };
+		16BB025825975DE600C2B48D /* UIStoryboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB025325975DE600C2B48D /* UIStoryboardExtension.swift */; };
+		16BB025925975DE600C2B48D /* PresenterInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB025425975DE600C2B48D /* PresenterInterface.swift */; };
+		16BB025A25975DE600C2B48D /* ViewInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB025525975DE600C2B48D /* ViewInterface.swift */; };
+		16BB025B25975DE600C2B48D /* InteractorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB025625975DE600C2B48D /* InteractorInterface.swift */; };
+		16BB026225975F9900C2B48D /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 16BB026125975F9900C2B48D /* NVActivityIndicatorView */; };
+		16BB026725975FA700C2B48D /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB026625975FA700C2B48D /* LoadingIndicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +72,24 @@
 		16BB01B3259752FA00C2B48D /* SocialMediaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaUITests.swift; sourceTree = "<group>"; };
 		16BB01B5259752FA00C2B48D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16BB02232597550200C2B48D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		16BB023025975D7C00C2B48D /* PostsInterfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsInterfaces.swift; sourceTree = "<group>"; };
+		16BB023125975D7C00C2B48D /* PostsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsPresenter.swift; sourceTree = "<group>"; };
+		16BB023225975D7C00C2B48D /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
+		16BB023325975D7C00C2B48D /* PostsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsInteractor.swift; sourceTree = "<group>"; };
+		16BB023425975D7C00C2B48D /* PostsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostsViewController.xib; sourceTree = "<group>"; };
+		16BB023525975D7C00C2B48D /* PostsWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsWireframe.swift; sourceTree = "<group>"; };
+		16BB024225975D8A00C2B48D /* PostDetailInterfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailInterfaces.swift; sourceTree = "<group>"; };
+		16BB024325975D8A00C2B48D /* PostDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailPresenter.swift; sourceTree = "<group>"; };
+		16BB024425975D8A00C2B48D /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
+		16BB024525975D8A00C2B48D /* PostDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailInteractor.swift; sourceTree = "<group>"; };
+		16BB024625975D8A00C2B48D /* PostDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostDetailViewController.xib; sourceTree = "<group>"; };
+		16BB024725975D8A00C2B48D /* PostDetailWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailWireframe.swift; sourceTree = "<group>"; };
+		16BB025225975DE600C2B48D /* BaseWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWireframe.swift; sourceTree = "<group>"; };
+		16BB025325975DE600C2B48D /* UIStoryboardExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtension.swift; sourceTree = "<group>"; };
+		16BB025425975DE600C2B48D /* PresenterInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterInterface.swift; sourceTree = "<group>"; };
+		16BB025525975DE600C2B48D /* ViewInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewInterface.swift; sourceTree = "<group>"; };
+		16BB025625975DE600C2B48D /* InteractorInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractorInterface.swift; sourceTree = "<group>"; };
+		16BB026625975FA700C2B48D /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16BB026225975F9900C2B48D /* NVActivityIndicatorView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,13 +142,14 @@
 		16BB018D259752F800C2B48D /* SocialMedia */ = {
 			isa = PBXGroup;
 			children = (
-				16BB018E259752F800C2B48D /* AppDelegate.swift */,
-				16BB0190259752F800C2B48D /* SceneDelegate.swift */,
+				16BB022925975CDE00C2B48D /* Application */,
+				16BB022A25975CE300C2B48D /* Common */,
+				16BB025125975DE600C2B48D /* VIPER */,
+				16BB022B25975CE800C2B48D /* Modules */,
+				16BB022D25975CF300C2B48D /* Supporting Files */,
+				16BB022C25975CEE00C2B48D /* Resources */,
 				16BB0192259752F800C2B48D /* ViewController.swift */,
 				16BB0194259752F800C2B48D /* Main.storyboard */,
-				16BB019A259752F900C2B48D /* Assets.xcassets */,
-				16BB019C259752F900C2B48D /* LaunchScreen.storyboard */,
-				16BB019F259752F900C2B48D /* Info.plist */,
 				16BB0197259752F800C2B48D /* SocialMedia.xcdatamodeld */,
 			);
 			path = SocialMedia;
@@ -134,6 +173,95 @@
 			path = SocialMediaUITests;
 			sourceTree = "<group>";
 		};
+		16BB022925975CDE00C2B48D /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				16BB018E259752F800C2B48D /* AppDelegate.swift */,
+				16BB0190259752F800C2B48D /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		16BB022A25975CE300C2B48D /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				16BB025F25975F5500C2B48D /* LoadingIndicator */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		16BB022B25975CE800C2B48D /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				16BB022E25975D4E00C2B48D /* Posts */,
+				16BB022F25975D5C00C2B48D /* PostDetail */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		16BB022C25975CEE00C2B48D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				16BB019A259752F900C2B48D /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		16BB022D25975CF300C2B48D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				16BB019C259752F900C2B48D /* LaunchScreen.storyboard */,
+				16BB019F259752F900C2B48D /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		16BB022E25975D4E00C2B48D /* Posts */ = {
+			isa = PBXGroup;
+			children = (
+				16BB023025975D7C00C2B48D /* PostsInterfaces.swift */,
+				16BB023125975D7C00C2B48D /* PostsPresenter.swift */,
+				16BB023225975D7C00C2B48D /* PostsViewController.swift */,
+				16BB023325975D7C00C2B48D /* PostsInteractor.swift */,
+				16BB023425975D7C00C2B48D /* PostsViewController.xib */,
+				16BB023525975D7C00C2B48D /* PostsWireframe.swift */,
+			);
+			path = Posts;
+			sourceTree = "<group>";
+		};
+		16BB022F25975D5C00C2B48D /* PostDetail */ = {
+			isa = PBXGroup;
+			children = (
+				16BB024225975D8A00C2B48D /* PostDetailInterfaces.swift */,
+				16BB024325975D8A00C2B48D /* PostDetailPresenter.swift */,
+				16BB024425975D8A00C2B48D /* PostDetailViewController.swift */,
+				16BB024525975D8A00C2B48D /* PostDetailInteractor.swift */,
+				16BB024625975D8A00C2B48D /* PostDetailViewController.xib */,
+				16BB024725975D8A00C2B48D /* PostDetailWireframe.swift */,
+			);
+			path = PostDetail;
+			sourceTree = "<group>";
+		};
+		16BB025125975DE600C2B48D /* VIPER */ = {
+			isa = PBXGroup;
+			children = (
+				16BB025225975DE600C2B48D /* BaseWireframe.swift */,
+				16BB025325975DE600C2B48D /* UIStoryboardExtension.swift */,
+				16BB025425975DE600C2B48D /* PresenterInterface.swift */,
+				16BB025525975DE600C2B48D /* ViewInterface.swift */,
+				16BB025625975DE600C2B48D /* InteractorInterface.swift */,
+			);
+			path = VIPER;
+			sourceTree = "<group>";
+		};
+		16BB025F25975F5500C2B48D /* LoadingIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				16BB026625975FA700C2B48D /* LoadingIndicator.swift */,
+			);
+			path = LoadingIndicator;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -150,6 +278,9 @@
 			dependencies = (
 			);
 			name = SocialMedia;
+			packageProductDependencies = (
+				16BB026125975F9900C2B48D /* NVActivityIndicatorView */,
+			);
 			productName = SocialMedia;
 			productReference = 16BB018B259752F800C2B48D /* SocialMedia.app */;
 			productType = "com.apple.product-type.application";
@@ -221,6 +352,9 @@
 				Base,
 			);
 			mainGroup = 16BB0182259752F800C2B48D;
+			packageReferences = (
+				16BB026025975F9900C2B48D /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
+			);
 			productRefGroup = 16BB018C259752F800C2B48D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -238,8 +372,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				16BB02242597550200C2B48D /* .gitignore in Resources */,
+				16BB024C25975D8A00C2B48D /* PostDetailViewController.xib in Resources */,
 				16BB019E259752F900C2B48D /* LaunchScreen.storyboard in Resources */,
 				16BB019B259752F900C2B48D /* Assets.xcassets in Resources */,
+				16BB023A25975D7C00C2B48D /* PostsViewController.xib in Resources */,
 				16BB0196259752F800C2B48D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,9 +401,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16BB023B25975D7C00C2B48D /* PostsWireframe.swift in Sources */,
+				16BB025B25975DE600C2B48D /* InteractorInterface.swift in Sources */,
+				16BB024A25975D8A00C2B48D /* PostDetailViewController.swift in Sources */,
+				16BB023825975D7C00C2B48D /* PostsViewController.swift in Sources */,
+				16BB024D25975D8A00C2B48D /* PostDetailWireframe.swift in Sources */,
+				16BB025A25975DE600C2B48D /* ViewInterface.swift in Sources */,
 				16BB0193259752F800C2B48D /* ViewController.swift in Sources */,
 				16BB018F259752F800C2B48D /* AppDelegate.swift in Sources */,
+				16BB025725975DE600C2B48D /* BaseWireframe.swift in Sources */,
+				16BB023625975D7C00C2B48D /* PostsInterfaces.swift in Sources */,
+				16BB023925975D7C00C2B48D /* PostsInteractor.swift in Sources */,
+				16BB024925975D8A00C2B48D /* PostDetailPresenter.swift in Sources */,
+				16BB026725975FA700C2B48D /* LoadingIndicator.swift in Sources */,
+				16BB025825975DE600C2B48D /* UIStoryboardExtension.swift in Sources */,
 				16BB0191259752F800C2B48D /* SceneDelegate.swift in Sources */,
+				16BB025925975DE600C2B48D /* PresenterInterface.swift in Sources */,
+				16BB023725975D7C00C2B48D /* PostsPresenter.swift in Sources */,
+				16BB024B25975D8A00C2B48D /* PostDetailInteractor.swift in Sources */,
+				16BB024825975D8A00C2B48D /* PostDetailInterfaces.swift in Sources */,
 				16BB0199259752F800C2B48D /* SocialMedia.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -446,7 +598,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SC4WC3C495;
-				INFOPLIST_FILE = SocialMedia/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SocialMedia/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -465,7 +617,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SC4WC3C495;
-				INFOPLIST_FILE = SocialMedia/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SocialMedia/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -601,6 +753,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		16BB026025975F9900C2B48D /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ninjaprox/NVActivityIndicatorView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		16BB026125975F9900C2B48D /* NVActivityIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 16BB026025975F9900C2B48D /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
+			productName = NVActivityIndicatorView;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		16BB0197259752F800C2B48D /* SocialMedia.xcdatamodeld */ = {
