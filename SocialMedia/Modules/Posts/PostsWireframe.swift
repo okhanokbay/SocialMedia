@@ -18,7 +18,18 @@ final class PostsWireframe: BaseWireframe {
         let moduleViewController = PostsViewController.loadFromNib()
         super.init(viewController: moduleViewController)
 
-        let interactor = PostsInteractor()
+        let apiResponseHandler = APIResponseHandler()
+        let apiErrorHandler = APIErrorHandler()
+        let apiLayer = APILayer(apiResponseHandler: apiResponseHandler)
+        
+        let persistenceLayer = CoreDataStack()
+        
+        let dataProvider = DataProvider(apiLayer: apiLayer,
+                                        apiResponseHandler: apiResponseHandler,
+                                        apiErrorHandler: apiErrorHandler,
+                                        persistenceLayer: persistenceLayer)
+        
+        let interactor = PostsInteractor(dataProvider: dataProvider)
         let presenter = PostsPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
         moduleViewController.presenter = presenter
     }

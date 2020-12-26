@@ -1,27 +1,31 @@
-import UIKit
-import SafariServices
+//
+//  BaseWireframe.swift
+//  SocialMedia
+//
+//  Created by Okhan Okbay on 26.12.2020.
+//
 
-protocol WireframeInterface: class {
+import UIKit
+
+protocol WireframeInterface: AnyObject {
     func popFromNavigationController(animated: Bool)
     func dismiss(animated: Bool)
 
-    func showErrorAlert(with message: String?)
-    func showAlert(with title: String?, message: String?)
+    func showErrorAlert(with message: String)
+    func showAlert(with title: String, message: String)
     func showAlert(with title: String?, message: String?, actions: [UIAlertAction])
 }
 
 class BaseWireframe {
-
-    private unowned var _viewController: UIViewController
+    private unowned var innerViewController: UIViewController
 
     //to retain view controller reference upon first access
-    private var _temporaryStoredViewController: UIViewController?
+    private var temporaryStoredViewController: UIViewController?
 
     init(viewController: UIViewController) {
-        _temporaryStoredViewController = viewController
-        _viewController = viewController
+        temporaryStoredViewController = viewController
+        innerViewController = viewController
     }
-
 }
 
 extension BaseWireframe: WireframeInterface {
@@ -33,14 +37,14 @@ extension BaseWireframe: WireframeInterface {
         navigationController?.dismiss(animated: animated)
     }
 
-    func showErrorAlert(with message: String?) {
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        showAlert(with: "Something went wrong", message: message, actions: [okAction])
+    func showErrorAlert(with message: String) {
+        let alertViewModel = AlertViewModel(title: Strings.Alert.error.rawValue, message: message, buttonText: Strings.Alert.ok.rawValue)
+        navigationController?.present(alertViewModel.alertController, animated: true, completion: nil)
     }
 
-    func showAlert(with title: String?, message: String?) {
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        showAlert(with: title, message: message, actions: [okAction])
+    func showAlert(with title: String, message: String) {
+        let alertViewModel = AlertViewModel(title: title, message: message, buttonText: Strings.Alert.ok.rawValue)
+        navigationController?.present(alertViewModel.alertController, animated: true, completion: nil)
     }
 
     func showAlert(with title: String?, message: String?, actions: [UIAlertAction]) {
@@ -51,35 +55,29 @@ extension BaseWireframe: WireframeInterface {
 }
 
 extension BaseWireframe {
-
     var viewController: UIViewController {
-        defer { _temporaryStoredViewController = nil }
-        return _viewController
+        defer { temporaryStoredViewController = nil }
+        return innerViewController
     }
 
     var navigationController: UINavigationController? {
         return viewController.navigationController
     }
-
 }
 
 extension UIViewController {
-
     func presentWireframe(_ wireframe: BaseWireframe, animated: Bool = true, completion: (() -> Void)? = nil) {
         present(wireframe.viewController, animated: animated, completion: completion)
     }
-
 }
 
 extension UINavigationController {
-
     func pushWireframe(_ wireframe: BaseWireframe, animated: Bool = true) {
-        self.pushViewController(wireframe.viewController, animated: animated)
+        pushViewController(wireframe.viewController, animated: animated)
     }
 
     func setRootWireframe(_ wireframe: BaseWireframe, animated: Bool = true) {
-        self.setViewControllers([wireframe.viewController], animated: animated)
+        setViewControllers([wireframe.viewController], animated: animated)
     }
-
 }
 

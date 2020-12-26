@@ -30,4 +30,7 @@ final class PostsPresenter {
 // MARK: - Extensions -
 
 extension PostsPresenter: PostsPresenterInterface {
+    func viewDidLoad() {
+        
+    }
 }

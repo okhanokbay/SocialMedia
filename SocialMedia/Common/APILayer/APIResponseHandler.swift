@@ -8,7 +8,12 @@
 import Foundation
 import Moya
 
-final class APIResponseHandler {
+protocol APIResponseHandlerInterface: AnyObject {
+    func handleResponse<T: Decodable>(with completion: @escaping ResponseHandler<T>,
+                                      responseType: T.Type) -> (Result<Response, MoyaError>) -> Void
+}
+
+final class APIResponseHandler: APIResponseHandlerInterface {
     func handleResponse<T: Decodable>(with completion: @escaping ResponseHandler<T>,
                                       responseType: T.Type) -> (Result<Response, MoyaError>) -> Void {
         

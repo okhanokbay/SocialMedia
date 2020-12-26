@@ -1,12 +1,19 @@
+//
+//  ViewInterface.swift
+//  SocialMedia
+//
+//  Created by Okhan Okbay on 26.12.2020.
+//
+
+
 import UIKit
 
-protocol ViewInterface: class {
+protocol ViewInterface: AnyObject {
     func showProgressHUD()
     func hideProgressHUD()
 }
 
 extension ViewInterface {
-
     func showProgressHUD() {
         LoadingIndicator.shared.showLoading()
     }

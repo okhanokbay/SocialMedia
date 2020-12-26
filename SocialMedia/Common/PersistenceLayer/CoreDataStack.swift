@@ -14,7 +14,7 @@ final class CoreDataStack {
     static let shared: CoreDataStack = .init()
     
     lazy var persistentContainer: NSPersistentContainer = {
-        let container: NSPersistentContainer = .init(name: "todo")
+        let container: NSPersistentContainer = .init(name: "SocialMedia")
         container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error {
                 self.handleError(error)
@@ -54,36 +54,42 @@ extension CoreDataStack {
     }
 }
 
-#warning("TODO")
-
 // MARK: Core Data Helper Methods
 
-//extension CoreDataStack: PersistenceLayer {
-//    func fetch() -> [TaskObject] {
-//        let request = Task.createFetchRequest()
-//        request.sortDescriptors = [NSSortDescriptor(keyPath: \Task.recordDate, ascending: false)]
-//        return (try? persistentContainer.viewContext.fetch(request)) ?? []
-//    }
-//
-//    func save(text: String) {
-//        let task = Task(context: persistentContainer.viewContext)
-//        task.taskDescription = text
-//        task.recordDate = Date()
-//        saveContext()
-//    }
-//
-//    func update(task: TaskObject, with text: String) {
-//        task.taskDescription = text
-//        task.recordDate = Date()
-//        saveContext()
-//    }
-//
-//    func delete(task: TaskObject) {
-//        guard let task = task as? Task else {
-//            return
-//        }
-//
-//        persistentContainer.viewContext.delete(task)
-//        saveContext()
-//    }
-//}
+extension CoreDataStack: PersistenceLayerInterface {
+    func fetchPosts() -> [PostMediationProtocol] {
+        let request = Post.createFetchRequest()
+        return (try? persistentContainer.viewContext.fetch(request)) ?? []
+    }
+    
+    func save(posts: [PostMediationProtocol]) {
+        posts.forEach { post in
+            let managedPost = Post(context: persistentContainer.viewContext)
+            managedPost.postID = post.postID
+            managedPost.title = post.title
+            managedPost.body = post.body
+            managedPost.name = post.name
+            managedPost.username = post.username
+            
+            managedPost.comments = Set(post.allComments.map { comment in
+                let managedComment = Comment(context: persistentContainer.viewContext)
+                managedComment.postID = comment.postID
+                managedComment.commentID = comment.commentID
+                managedComment.name = comment.name
+                managedComment.email = comment.email
+                managedComment.body = comment.body
+                managedComment.inPost = managedPost
+                return managedComment
+            })
+        }
+        
+        saveContext()
+    }
+    
+    func fetchComments(for postID: Int) -> [CommentMediationProtocol] {
+        let request = Comment.createFetchRequest()
+        let predicate = NSPredicate(format: "postID = %@", postID)
+        request.predicate = predicate
+        return (try? persistentContainer.viewContext.fetch(request)) ?? []
+    }
+}

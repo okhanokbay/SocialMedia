@@ -10,11 +10,11 @@ import Foundation
 struct UserAPIResponse: Decodable {
     let userID: Int
     let name: String
-    let surname: String
+    let username: String
     
     enum CodingKeys: String, CodingKey {
         case userID = "id"
         case name = "name"
-        case surname = "surname"
+        case username = "username"
     }
 }

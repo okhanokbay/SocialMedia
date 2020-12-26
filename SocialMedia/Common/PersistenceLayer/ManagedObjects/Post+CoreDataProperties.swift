@@ -2,26 +2,24 @@
 //  Post+CoreDataProperties.swift
 //  SocialMedia
 //
-//  Created by Okhan Okbay on 26.12.2020.
+//  Created by Okhan Okbay on 27.12.2020.
 //
 //
 
 import Foundation
 import CoreData
 
-
 extension Post {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Post> {
+    @nonobjc public class func createFetchRequest() -> NSFetchRequest<Post> {
         return NSFetchRequest<Post>(entityName: "Post")
     }
 
-    @NSManaged public var postID: Int64
-    @NSManaged public var name: Int64
-    @NSManaged public var title: Int64
-    @NSManaged public var body: Int64
-    @NSManaged public var username: String?
-    @NSManaged public var comments: NSSet?
+    @NSManaged public var body: String
+    @NSManaged public var name: String
+    @NSManaged public var postID: Int
+    @NSManaged public var title: String
+    @NSManaged public var username: String
+    @NSManaged public var comments: Set<Comment>
 
 }
 
@@ -35,13 +33,14 @@ extension Post {
     @NSManaged public func removeFromComments(_ value: Comment)
 
     @objc(addComments:)
-    @NSManaged public func addToComments(_ values: NSSet)
+    @NSManaged public func addToComments(_ values: Set<Comment>)
 
     @objc(removeComments:)
-    @NSManaged public func removeFromComments(_ values: NSSet)
-
+    @NSManaged public func removeFromComments(_ values: Set<Comment>)
 }
 
-extension Post : Identifiable {
-
+extension Post: PostMediationProtocol {
+    var allComments: [CommentMediationProtocol] {
+        return Array(comments)
+    }
 }

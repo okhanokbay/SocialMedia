@@ -11,6 +11,11 @@
 import Foundation
 
 final class PostsInteractor {
+    private let dataProvider: DataProvider
+    
+    init(dataProvider: DataProvider) {
+        self.dataProvider = dataProvider
+    }
 }
 
 // MARK: - Extensions -

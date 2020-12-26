@@ -14,7 +14,7 @@ enum SocialMediaEndpoint: TargetType {
     case comments(postID: Int)
     
     var baseURL: URL {
-        return  URL(string: "http://jsonplaceholder.typicode.com")! // No problem in force unwrapping here since the URL string is static
+        return  URL(string: "https://jsonplaceholder.typicode.com")! // No problem in force unwrapping here since the URL string is static
     }
     
     var path: String {

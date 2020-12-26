@@ -17,11 +17,12 @@ final class PostsViewController: UIViewController {
     var presenter: PostsPresenterInterface!
 
     // MARK: - Lifecycle -
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        presenter.viewDidLoad()
     }
-
 }
 
 // MARK: - Extensions -
