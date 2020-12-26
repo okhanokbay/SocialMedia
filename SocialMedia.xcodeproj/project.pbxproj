@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1621E8CE25976E6E004A117F /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 1621E8CD25976E6E004A117F /* Moya */; };
+		1621E8D32597721E004A117F /* COMMENTS.md in Resources */ = {isa = PBXBuildFile; fileRef = 1621E8D22597721E004A117F /* COMMENTS.md */; };
 		16BB018F259752F800C2B48D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB018E259752F800C2B48D /* AppDelegate.swift */; };
 		16BB0191259752F800C2B48D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB0190259752F800C2B48D /* SceneDelegate.swift */; };
 		16BB0193259752F800C2B48D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB0192259752F800C2B48D /* ViewController.swift */; };
@@ -57,6 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1621E8D22597721E004A117F /* COMMENTS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = COMMENTS.md; sourceTree = "<group>"; };
 		16BB018B259752F800C2B48D /* SocialMedia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialMedia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16BB018E259752F800C2B48D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		16BB0190259752F800C2B48D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 		16BB0182259752F800C2B48D = {
 			isa = PBXGroup;
 			children = (
+				1621E8D22597721E004A117F /* COMMENTS.md */,
 				16BB02232597550200C2B48D /* .gitignore */,
 				16BB018D259752F800C2B48D /* SocialMedia */,
 				16BB01A7259752FA00C2B48D /* SocialMediaTests */,
@@ -379,6 +382,7 @@
 				16BB024C25975D8A00C2B48D /* PostDetailViewController.xib in Resources */,
 				16BB019E259752F900C2B48D /* LaunchScreen.storyboard in Resources */,
 				16BB019B259752F900C2B48D /* Assets.xcassets in Resources */,
+				1621E8D32597721E004A117F /* COMMENTS.md in Resources */,
 				16BB023A25975D7C00C2B48D /* PostsViewController.xib in Resources */,
 				16BB0196259752F800C2B48D /* Main.storyboard in Resources */,
 			);
