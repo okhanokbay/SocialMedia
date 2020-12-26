@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Comment" representedClassName="Comment" syncable="YES">
+        <attribute name="body" attributeType="String"/>
+        <attribute name="commentID" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="email" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="postID" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <relationship name="post" maxCount="1" deletionRule="Nullify" destinationEntity="Post" inverseName="comments" inverseEntity="Post"/>
+    </entity>
+    <entity name="Post" representedClassName="Post" syncable="YES">
+        <attribute name="body" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="postID" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="title" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="username" attributeType="String"/>
+        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Comment" inverseName="post" inverseEntity="Comment"/>
+    </entity>
+    <elements>
+        <element name="Post" positionX="-63" positionY="-18" width="128" height="119"/>
+        <element name="Comment" positionX="-54" positionY="-9" width="128" height="119"/>
+    </elements>
 </model>
