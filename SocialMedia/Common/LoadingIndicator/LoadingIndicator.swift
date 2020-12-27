@@ -26,12 +26,6 @@ final class LoadingIndicator {
         indicator.startAnimating()
     }
     
-    func showLoading(on view: UIView) {
-        DispatchQueue.main.async {
-            self.loadingWindow.isHidden = false
-        }
-    }
-    
     func showLoading() {
         DispatchQueue.main.async {
             self.loadingWindow.isHidden = false

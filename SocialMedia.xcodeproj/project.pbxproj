@@ -15,6 +15,8 @@
 		16074EE12597F7FC00580D11 /* Post+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16074EDD2597F7FC00580D11 /* Post+CoreDataProperties.swift */; };
 		16074EE22597F7FC00580D11 /* Comment+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16074EDE2597F7FC00580D11 /* Comment+CoreDataClass.swift */; };
 		16074EE32597F7FC00580D11 /* Comment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16074EDF2597F7FC00580D11 /* Comment+CoreDataProperties.swift */; };
+		16074EE8259879C000580D11 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16074EE7259879C000580D11 /* URL+Extensions.swift */; };
+		16074EED25987A5B00580D11 /* Optional+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16074EEC25987A5B00580D11 /* Optional+Extensions.swift */; };
 		1621E8CE25976E6E004A117F /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 1621E8CD25976E6E004A117F /* Moya */; };
 		1621E8D32597721E004A117F /* COMMENTS.md in Resources */ = {isa = PBXBuildFile; fileRef = 1621E8D22597721E004A117F /* COMMENTS.md */; };
 		1621E93425977521004A117F /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1621E93125977521004A117F /* UIViewController+Extensions.swift */; };
@@ -91,6 +93,8 @@
 		16074EDD2597F7FC00580D11 /* Post+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		16074EDE2597F7FC00580D11 /* Comment+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comment+CoreDataClass.swift"; sourceTree = "<group>"; };
 		16074EDF2597F7FC00580D11 /* Comment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Comment+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		16074EE7259879C000580D11 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
+		16074EEC25987A5B00580D11 /* Optional+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Extensions.swift"; sourceTree = "<group>"; };
 		1621E8D22597721E004A117F /* COMMENTS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = COMMENTS.md; sourceTree = "<group>"; };
 		1621E93125977521004A117F /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		1621E93225977521004A117F /* UITableViewCell+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extensions.swift"; sourceTree = "<group>"; };
@@ -187,6 +191,8 @@
 				1621E93225977521004A117F /* UITableViewCell+Extensions.swift */,
 				1621E93325977521004A117F /* UIView+Extensions.swift */,
 				1621E93125977521004A117F /* UIViewController+Extensions.swift */,
+				16074EE7259879C000580D11 /* URL+Extensions.swift */,
+				16074EEC25987A5B00580D11 /* Optional+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -570,6 +576,7 @@
 				16BB024A25975D8A00C2B48D /* PostDetailViewController.swift in Sources */,
 				16BB023825975D7C00C2B48D /* PostsViewController.swift in Sources */,
 				1621E98B25979BF7004A117F /* UserAPIModel.swift in Sources */,
+				16074EE8259879C000580D11 /* URL+Extensions.swift in Sources */,
 				1621E97825979A50004A117F /* APILayer.swift in Sources */,
 				16BB024D25975D8A00C2B48D /* PostDetailWireframe.swift in Sources */,
 				16074EE22597F7FC00580D11 /* Comment+CoreDataClass.swift in Sources */,
@@ -599,6 +606,7 @@
 				16BB025925975DE600C2B48D /* PresenterInterface.swift in Sources */,
 				16074EE32597F7FC00580D11 /* Comment+CoreDataProperties.swift in Sources */,
 				16074EE02597F7FC00580D11 /* Post+CoreDataClass.swift in Sources */,
+				16074EED25987A5B00580D11 /* Optional+Extensions.swift in Sources */,
 				16BB023725975D7C00C2B48D /* PostsPresenter.swift in Sources */,
 				1654061B2597DA2E00435149 /* Colors.swift in Sources */,
 				16BB024B25975D8A00C2B48D /* PostDetailInteractor.swift in Sources */,
