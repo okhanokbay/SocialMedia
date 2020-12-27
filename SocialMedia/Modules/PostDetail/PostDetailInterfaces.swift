@@ -27,6 +27,8 @@ protocol PostDetailPresenterInterface: PresenterInterface {
     func numberOfSections() -> Int
     func numberOfItems(in section: Int) -> Int
     func item(at section: Int, row: Int) -> MultiPurposeTableCellViewModelable
+    
+    func itemForHeader(at section: Int) -> MultiPurposeTableCellViewModelable
 }
 
 protocol PostDetailInteractorInputInterface: InteractorInterface {

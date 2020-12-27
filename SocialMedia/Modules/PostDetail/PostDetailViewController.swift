@@ -17,6 +17,7 @@ final class PostDetailViewController: UIViewController {
     // MARK: - Public properties -
 
     var presenter: PostDetailPresenterInterface!
+    private let estimatedSectionHeaderHeight: CGFloat = 80
 
     // MARK: - Lifecycle -
 
@@ -71,10 +72,27 @@ extension PostDetailViewController: UITableViewDataSource {
         cell.configure(with: viewModel)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let viewModel = presenter.itemForHeader(at: section)
+        
+        // Force casted depending on this convo here: https://stackoverflow.com/questions/44168134/how-to-correct-avoid-this-force-cast
+        let cell = tableView.dequeueReusableCell(withIdentifier: MultiPurposeTableViewCell.reuseIdentifier) as! MultiPurposeTableViewCell
+        cell.configure(with: viewModel)
+        return cell
+    }
 }
 
 extension PostDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        return estimatedSectionHeaderHeight
     }
 }

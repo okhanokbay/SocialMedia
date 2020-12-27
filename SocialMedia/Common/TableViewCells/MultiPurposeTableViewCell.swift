@@ -17,6 +17,7 @@ protocol MultiPurposeTableCellViewModelable {
     var secondText: String? { get }
     var thirdText: String? { get }
     var disclosureIndicatorType: DisclosureIndicatorType? { get }
+    var isInHeader: Bool { get }
 }
 
 extension MultiPurposeTableCellViewModelable {
@@ -24,6 +25,7 @@ extension MultiPurposeTableCellViewModelable {
     var secondText: String? {  return nil  }
     var thirdText: String? { return nil  }
     var disclosureIndicatorType: DisclosureIndicatorType? { return nil  }
+    var isInHeader: Bool { return false }
 }
 
 struct MultiPurposeTableCellViewModel: MultiPurposeTableCellViewModelable {
@@ -32,6 +34,7 @@ struct MultiPurposeTableCellViewModel: MultiPurposeTableCellViewModelable {
     var secondText: String?
     var thirdText: String?
     var disclosureIndicatorType: DisclosureIndicatorType?
+    var isInHeader: Bool = false
 }
 
 final class MultiPurposeTableViewCell: UITableViewCell {
@@ -48,6 +51,8 @@ final class MultiPurposeTableViewCell: UITableViewCell {
     @IBOutlet private weak var rightContainerView: UIView!
     @IBOutlet private weak var rightImageView: UIImageView!
     
+    private var viewModel: MultiPurposeTableCellViewModelable!
+    
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
         
@@ -61,10 +66,14 @@ final class MultiPurposeTableViewCell: UITableViewCell {
     }
     
     private func setBackgroundColor(for activeStatus: Bool) {
-        contentView.backgroundColor = activeStatus ? .systemYellow : .systemGray6
+        contentView.backgroundColor = activeStatus ? .systemYellow : (viewModel.isInHeader ? .systemGray5 : .systemGray6)
     }
     
     func configure(with viewModel: MultiPurposeTableCellViewModelable) {
+        self.viewModel = viewModel
+        
+        setBackgroundColor(for: false)
+        
         setupLeftImage(with: viewModel)
         setupLabels(with: viewModel)
         setupRightView(with: viewModel)
