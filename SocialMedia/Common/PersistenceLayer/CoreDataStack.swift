@@ -40,10 +40,12 @@ final class CoreDataStack {
 extension CoreDataStack {
     func save(context: NSManagedObjectContext) {
         if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                handleError(error)
+            context.performAndWait { [weak self] in
+                do {
+                    try context.save()
+                } catch {
+                    self?.handleError(error)
+                }
             }
         }
     }
@@ -60,13 +62,17 @@ extension CoreDataStack: PersistenceCreateLayerInterface {
               completion: ((_ isSuccess: Bool) -> Void)? = nil) {
 
         persistentContainer.performBackgroundTask { [weak self] backgroundContext in
-            guard let self = self else { return }
+            guard let self = self else {
+                completion?(false)
+                return
+            }
 
             posts.forEach { post in
                 Post.makeSelf(from: post, context: backgroundContext)
             }
 
             self.save(context: backgroundContext)
+            completion?(true)
         }
     }
 }
@@ -112,8 +118,8 @@ extension CoreDataStack: PersistenceUpdateLayerInterface {
                 let newComments = Set(comments.map { Comment.makeSelf(from: $0, context: backgroundContext) })
                 managedPost.postComments = newComments
 
-                completion?(true)
                 self.save(context: backgroundContext)
+                completion?(true)
 
             } else {
                 completion?(false)

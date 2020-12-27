@@ -14,7 +14,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                willConnectTo session: UISceneSession,
                options connectionOptions: UIScene.ConnectionOptions) {
 
-        guard let windowScene = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else {
+            debugPrint("Window Scene not found")
+            return
+        }
 
         let postsNavigationController = PostsNavigationController()
         postsNavigationController.navigationBar.tintColor = .brown

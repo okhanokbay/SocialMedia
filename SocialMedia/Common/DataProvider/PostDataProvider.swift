@@ -48,22 +48,25 @@ extension PostDataProvider: PostDataProviderInterface {}
 extension PostDataProvider {
     func fetchPosts(completion: @escaping PostDataProviderCompletion<PostViewModelProtocol>) {
         persistenceLayer.fetchPosts { [weak self] localPosts in
-            guard let self = self else { return }
+            guard let self = self else {
+                completion([])
+                return
+            }
 
             guard localPosts.count == 0 else {
                 self.dataStore.postViewModels = localPosts
                 completion(localPosts)
-                print("Using posts from local warehouse")
+                debugPrint("Using posts from local warehouse")
                 return
             }
 
             self.fetchPostsFromAPI { remotePosts in
                 self.dataStore.postViewModels = remotePosts
                 completion(remotePosts)
-                print("Using posts from remote server")
+                debugPrint("Using posts from remote server")
 
                 self.persistenceLayer.save(posts: remotePosts) { isSuccess in
-                    print("Remote posts \(isSuccess ? "successfully" : "could not be") saved into local warehouse")
+                    debugPrint("Remote posts \(isSuccess ? "successfully" : "could not be") saved into local warehouse")
                 }
             }
         }
@@ -83,7 +86,10 @@ extension PostDataProvider {
 
     private func fetchUsersCompletionHandler(taskGroup: DispatchGroup) -> (ResponseHandler<[UserAPIResponse]>) {
         return { [weak self] result in
-            guard let self = self else { return }
+            guard let self = self else {
+                taskGroup.leave()
+                return
+            }
 
             switch result {
             case .success(let users):
@@ -99,7 +105,10 @@ extension PostDataProvider {
 
     private func fetchPostsCompletionHandler(taskGroup: DispatchGroup) -> (ResponseHandler<[PostAPIResponse]>) {
         return { [weak self] result in
-            guard let self = self else { return }
+            guard let self = self else {
+                taskGroup.leave()
+                return
+            }
 
             switch result {
             case .success(let posts):
@@ -116,7 +125,10 @@ extension PostDataProvider {
     typealias TaskGroupCompletion = PostDataProviderCompletion<PostViewModelProtocol>
     private func taskGroupCompletionHandler(completion: @escaping TaskGroupCompletion) -> () -> Void {
         return { [weak self] in
-            guard let self = self else { return }
+            guard let self = self else {
+                completion([])
+                return
+            }
 
             // Create a userDict to get related user object with postID in O(1) complexity
             let userDict: [Int: UserAPIResponse] = self.dataStore.users.reduce(into: [:]) { (result, response) in
@@ -141,22 +153,25 @@ extension PostDataProvider {
                        completion: @escaping PostDataProviderCompletion<CommentViewModelProtocol>) {
 
         persistenceLayer.fetchComments(for: post) { [weak self] localComments in
-            guard let self = self else { return }
+            guard let self = self else {
+                completion([])
+                return
+            }
 
             guard localComments.count == 0 else {
                 self.dataStore.commentViewModels = localComments
                 completion(localComments)
-                print("Using comments from local warehouse")
+                debugPrint("Using comments from local warehouse")
                 return
             }
 
             self.fetchCommentsFromAPI(for: post) { remoteComments in
                 self.dataStore.commentViewModels = remoteComments
                 completion(remoteComments)
-                print("Using comments from remote server")
+                debugPrint("Using comments from remote server")
 
                 self.persistenceLayer.update(post: post, with: remoteComments) { isSuccess in
-                    print("Remote comments \(isSuccess ? "successfully" : "could not be") saved into local warehouse")
+                    debugPrint("Remote comments \(isSuccess ? "successfully" : "could not be") saved into local warehouse")
                 }
             }
         }
@@ -166,7 +181,10 @@ extension PostDataProvider {
                                       completion: @escaping PostDataProviderCompletion<CommentViewModelProtocol>) {
 
         apiLayer.fetchComments(for: post) { [weak self] result in
-            guard let self = self else { return }
+            guard let self = self else {
+                completion([])
+                return
+            }
 
             switch result {
             case .success(let comments):
