@@ -117,7 +117,8 @@ extension PostDetailPresenter {
                                                                      isInHeader: true)
         headerViewModels.append(authorNameCellViewModel)
         
-        let postDescriptionCellViewModel = MultiPurposeTableCellViewModel(firstText: post.body)
+        let postDescriptionCellViewModel = MultiPurposeTableCellViewModel(firstText: post.body,
+                                                                          canBeSelected: false)
         cellViewModels.append([postDescriptionCellViewModel])
     }
 }
