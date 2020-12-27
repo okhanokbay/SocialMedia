@@ -22,8 +22,8 @@ final class PostDetailInteractor {
 // MARK: - Extensions -
 
 extension PostDetailInteractor: PostDetailInteractorInputInterface {
-    func getComments(for postID: Int) {
-        dataProvider.fetchComments(for: postID) { [weak self] comments in
+    func getComments(for commentRequest: CommentRequest) {
+        dataProvider.fetchComments(for: commentRequest) { [weak self] comments in
             self?.output.commentsReceived(comments: comments)
         }
     }

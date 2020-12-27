@@ -15,7 +15,7 @@ protocol PostsWireframeInterface: WireframeInterface {
 }
 
 protocol PostsRouterInterface: RouterInterface {
-    func navigateToPostDetail(with dataProvider: PostDataProviderInterface, postID: Int)
+    func navigateToPostDetail(with dataProvider: PostDataProviderInterface, commentRequest: CommentRequest)
 }
 
 protocol PostsViewInterface: ViewInterface {
@@ -36,6 +36,7 @@ protocol PostsInteractorInputInterface: InteractorInterface {
     func getItem(at index: Int) -> PostViewModelProtocol
     
     func getDataProvider() -> PostDataProviderInterface
+    func getCommentRequest(for index: Int) -> CommentRequest
 }
 
 protocol PostsInteractorOutputInterface: InteractorInterface {

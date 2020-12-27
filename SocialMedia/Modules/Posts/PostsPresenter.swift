@@ -49,8 +49,8 @@ extension PostsPresenter: PostsPresenterInterface {
     
     func didSelectItem(at index: Int) {
         let dataProvider = interactor.getDataProvider()
-        let post = interactor.getItem(at: index)
-        router.navigateToPostDetail(with: dataProvider, postID: post.postID)
+        let commentRequest = interactor.getCommentRequest(for: index)
+        router.navigateToPostDetail(with: dataProvider, commentRequest: commentRequest)
     }
 }
 

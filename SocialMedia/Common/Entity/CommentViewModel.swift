@@ -38,3 +38,7 @@ struct CommentViewModel: CommentViewModelProtocol {
         self.body = body
     }
 }
+
+struct CommentRequest {
+    let postID: Int
+}

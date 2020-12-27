@@ -7,14 +7,6 @@
 
 import Foundation
 
-struct CommentAPIRequest: Encodable {
-    let postID: Int
-    
-    enum CodingKeys: String, CodingKey {
-        case postID = "postId"
-    }
-}
-
 struct CommentAPIResponse: Decodable, Hashable {
     let postID: Int
     let commentID: Int

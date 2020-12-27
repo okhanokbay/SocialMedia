@@ -17,19 +17,19 @@ final class PostDetailPresenter {
     private unowned let view: PostDetailViewInterface
     private let interactor: PostDetailInteractorInputInterface
     private let router: PostDetailRouterInterface
-    private let postID: Int
+    private let commentRequest: CommentRequest
     
     // MARK: - Lifecycle -
     
     init(view: PostDetailViewInterface,
          interactor: PostDetailInteractorInputInterface,
          router: PostDetailRouterInterface,
-         postID: Int) {
+         commentRequest: CommentRequest) {
         
         self.view = view
         self.interactor = interactor
         self.router = router
-        self.postID = postID
+        self.commentRequest = commentRequest
     }
 }
 
@@ -38,7 +38,7 @@ final class PostDetailPresenter {
 extension PostDetailPresenter: PostDetailPresenterInterface {
     func viewDidLoad() {
         view.showProgressHUD()
-        interactor.getComments(for: postID)
+        interactor.getComments(for: commentRequest)
     }
 }
 

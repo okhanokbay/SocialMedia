@@ -55,7 +55,7 @@ extension CoreDataStack {
 
 // MARK: - Core Data Create Methods -
 
-extension CoreDataStack: PersistenceLayerCreateInterface {
+extension CoreDataStack: PersistenceCreateLayerInterface {
     func save(posts: [PostViewModelProtocol],
               completion: ((_ isSuccess: Bool) -> Void)? = nil) {
         
@@ -73,7 +73,7 @@ extension CoreDataStack: PersistenceLayerCreateInterface {
 
 // MARK: - Core Data Read Methods -
 
-extension CoreDataStack: PersistenceLayerReadInterface {
+extension CoreDataStack: PersistenceReadLayerInterface {
     func fetchPosts(completion: @escaping ([PostViewModelProtocol]) -> Void) {
         let request = Post.createFetchRequest()
         persistentContainer.performBackgroundTask { [weak self] backgroundContext in
@@ -96,7 +96,7 @@ extension CoreDataStack: PersistenceLayerReadInterface {
 
 // MARK: - Core Data Update Methods -
 
-extension CoreDataStack: PersistenceLayerUpdateInterface {
+extension CoreDataStack: PersistenceUpdateLayerInterface {
     func update(post: PostViewModelProtocol,
                 with comments: [CommentViewModelProtocol],
                 completion: ((_ isSuccess: Bool) -> Void)? = nil) {

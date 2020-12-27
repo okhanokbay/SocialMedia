@@ -11,7 +11,7 @@ typealias PostDataProviderCompletion<T> = ([T]) -> Void
 
 protocol PostDataProviderInterface: AnyObject {
     func fetchPosts(completion: @escaping PostDataProviderCompletion<PostViewModelProtocol>)
-    func fetchComments(for postID: Int, completion: @escaping PostDataProviderCompletion<CommentViewModelProtocol>)
+    func fetchComments(for commentRequest: CommentRequest, completion: @escaping PostDataProviderCompletion<CommentViewModelProtocol>)
     
     var currentPosts: [PostViewModelProtocol] { get }
 }
@@ -21,27 +21,27 @@ final class PostDataProvider {
     private let apiResponseHandler: APIResponseHandlerInterface
     private let apiErrorHandler: APIErrorHandlerInterface
     
-    private let persistenceLayerCreate: PersistenceLayerCreateInterface
-    private let persistenceLayerRead: PersistenceLayerReadInterface
-    private let persistenceLayerUpdate: PersistenceLayerUpdateInterface
+    private let persistenceCreateLayer: PersistenceCreateLayerInterface
+    private let persistenceReadLayer: PersistenceReadLayerInterface
+    private let persistenceUpdateLayer: PersistenceUpdateLayerInterface
     
     private let dataStore: PostDataStoreProtocol
     
     init(apiLayer: APILayerInterface,
          apiResponseHandler: APIResponseHandlerInterface,
          apiErrorHandler: APIErrorHandlerInterface,
-         persistenceLayerCreate: PersistenceLayerCreateInterface,
-         persistenceLayerRead: PersistenceLayerReadInterface,
-         persistenceLayerUpdate: PersistenceLayerUpdateInterface,
+         persistenceCreateLayer: PersistenceCreateLayerInterface,
+         persistenceReadLayer: PersistenceReadLayerInterface,
+         persistenceUpdateLayer: PersistenceUpdateLayerInterface,
          dataStore: PostDataStoreProtocol) {
         
         self.apiLayer = apiLayer
         self.apiResponseHandler = apiResponseHandler
         self.apiErrorHandler = apiErrorHandler
         
-        self.persistenceLayerCreate = persistenceLayerCreate
-        self.persistenceLayerRead = persistenceLayerRead
-        self.persistenceLayerUpdate = persistenceLayerUpdate
+        self.persistenceCreateLayer = persistenceCreateLayer
+        self.persistenceReadLayer = persistenceReadLayer
+        self.persistenceUpdateLayer = persistenceUpdateLayer
         
         self.dataStore = dataStore
     }
@@ -53,7 +53,7 @@ extension PostDataProvider: PostDataProviderInterface {}
 
 extension PostDataProvider {
     func fetchPosts(completion: @escaping PostDataProviderCompletion<PostViewModelProtocol>) {
-        persistenceLayerRead.fetchPosts { [weak self] localPosts in
+        persistenceReadLayer.fetchPosts { [weak self] localPosts in
             guard let self = self else { return }
             
             if localPosts.count == 0 {
@@ -125,7 +125,17 @@ extension PostDataProvider {
 }
 
 extension PostDataProvider {
-    func fetchComments(for postID: Int, completion: @escaping PostDataProviderCompletion<CommentViewModelProtocol>) {
-        #warning("TODO")
+    func fetchComments(for commentRequest: CommentRequest, completion: @escaping PostDataProviderCompletion<CommentViewModelProtocol>) {
+        apiLayer.fetchComments(commentRequest: commentRequest) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let comments):
+                print(comments)
+                
+            case .failure(let error):
+                self.apiErrorHandler.handleError(error)
+            }
+        }
     }
 }

@@ -29,9 +29,9 @@ extension PostsWireframe: PostsWireframeInterface {
         let dataProvider = PostDataProvider(apiLayer: apiLayer,
                                             apiResponseHandler: apiResponseHandler,
                                             apiErrorHandler: apiErrorHandler,
-                                            persistenceLayerCreate: persistenceLayer,
-                                            persistenceLayerRead: persistenceLayer,
-                                            persistenceLayerUpdate: persistenceLayer,
+                                            persistenceCreateLayer: persistenceLayer,
+                                            persistenceReadLayer: persistenceLayer,
+                                            persistenceUpdateLayer: persistenceLayer,
                                             dataStore: dataStore)
         
         let router = PostsRouter(viewController: viewController)
