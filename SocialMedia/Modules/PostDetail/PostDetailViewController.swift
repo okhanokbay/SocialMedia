@@ -79,7 +79,7 @@ extension PostDetailViewController: UITableViewDataSource {
         // Force casted depending on this convo here: https://stackoverflow.com/questions/44168134/how-to-correct-avoid-this-force-cast
         let cell = tableView.dequeueReusableCell(withIdentifier: MultiPurposeTableViewCell.reuseIdentifier) as! MultiPurposeTableViewCell
         cell.configure(with: viewModel)
-        return cell
+        return cell.contentView
     }
 }
 

@@ -81,6 +81,7 @@ extension PostDetailPresenter: PostDetailInteractorOutputInterface {
         let commentsTitle = "\(Strings.Post.commentsTitle.rawValue) (\(comments.count))"
         let commentsTitleCellViewModel = MultiPurposeTableCellViewModel(leftImage: ImageFactory.comment.image,
                                                                         firstText: commentsTitle,
+                                                                        canBeSelected: false,
                                                                         isInHeader: true)
         headerViewModels.append(commentsTitleCellViewModel)
     }
@@ -96,7 +97,8 @@ extension PostDetailPresenter: PostDetailInteractorOutputInterface {
             let commentCellViewModels: [MultiPurposeTableCellViewModel] = comments.map { comment in
                 return .init(firstText: comment.body,
                              secondText: comment.name,
-                             thirdText: comment.email)
+                             thirdText: comment.email,
+                             canBeSelected: false)
             }
             viewModels.append(contentsOf: commentCellViewModels)
         }
@@ -111,6 +113,7 @@ extension PostDetailPresenter {
     func setupInitialCellViewModels() {
         let authorNameCellViewModel = MultiPurposeTableCellViewModel(leftImage: ImageFactory.profile.image,
                                                                      firstText: post.name,
+                                                                     canBeSelected: false,
                                                                      isInHeader: true)
         headerViewModels.append(authorNameCellViewModel)
         

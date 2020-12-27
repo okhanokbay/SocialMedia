@@ -17,6 +17,7 @@ protocol MultiPurposeTableCellViewModelable {
     var secondText: String? { get }
     var thirdText: String? { get }
     var disclosureIndicatorType: DisclosureIndicatorType? { get }
+    var canBeSelected: Bool { get }
     var isInHeader: Bool { get }
 }
 
@@ -25,6 +26,7 @@ extension MultiPurposeTableCellViewModelable {
     var secondText: String? {  return nil  }
     var thirdText: String? { return nil  }
     var disclosureIndicatorType: DisclosureIndicatorType? { return nil  }
+    var canBeSelected: Bool { return true }
     var isInHeader: Bool { return false }
 }
 
@@ -34,6 +36,7 @@ struct MultiPurposeTableCellViewModel: MultiPurposeTableCellViewModelable {
     var secondText: String?
     var thirdText: String?
     var disclosureIndicatorType: DisclosureIndicatorType?
+    var canBeSelected: Bool = true
     var isInHeader: Bool = false
 }
 
@@ -56,13 +59,17 @@ final class MultiPurposeTableViewCell: UITableViewCell {
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
         
-        setBackgroundColor(for: highlighted)
+        if viewModel.canBeSelected {
+            setBackgroundColor(for: highlighted)
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        setBackgroundColor(for: selected)
+        if viewModel.canBeSelected {
+            setBackgroundColor(for: selected)
+        }
     }
     
     private func setBackgroundColor(for activeStatus: Bool) {
