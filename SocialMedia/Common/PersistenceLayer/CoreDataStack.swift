@@ -53,9 +53,27 @@ extension CoreDataStack {
     }
 }
 
-// MARK: - Core Data Output Methods -
+// MARK: - Core Data Create Methods -
 
-extension CoreDataStack: PersistenceLayerOutputInterface {
+extension CoreDataStack: PersistenceLayerCreateInterface {
+    func save(posts: [PostViewModelProtocol],
+              completion: ((_ isSuccess: Bool) -> Void)? = nil) {
+        
+        persistentContainer.performBackgroundTask { [weak self] backgroundContext in
+            guard let self = self else { return }
+            
+            posts.forEach { post in
+                Post.makeSelf(from: post, context: backgroundContext)
+            }
+            
+            self.save(context: backgroundContext)
+        }
+    }
+}
+
+// MARK: - Core Data Read Methods -
+
+extension CoreDataStack: PersistenceLayerReadInterface {
     func fetchPosts(completion: @escaping ([PostViewModelProtocol]) -> Void) {
         let request = Post.createFetchRequest()
         persistentContainer.performBackgroundTask { [weak self] backgroundContext in
@@ -76,23 +94,9 @@ extension CoreDataStack: PersistenceLayerOutputInterface {
     }
 }
 
-// MARK: - Core Data Input Methods -
+// MARK: - Core Data Update Methods -
 
-extension CoreDataStack: PersistenceLayerInputInterface {
-    func save(posts: [PostViewModelProtocol],
-              completion: ((_ isSuccess: Bool) -> Void)? = nil) {
-        
-        persistentContainer.performBackgroundTask { [weak self] backgroundContext in
-            guard let self = self else { return }
-            
-            posts.forEach { post in
-                Post.makeSelf(from: post, context: backgroundContext)
-            }
-            
-            self.save(context: backgroundContext)
-        }
-    }
-    
+extension CoreDataStack: PersistenceLayerUpdateInterface {
     func update(post: PostViewModelProtocol,
                 with comments: [CommentViewModelProtocol],
                 completion: ((_ isSuccess: Bool) -> Void)? = nil) {

@@ -11,6 +11,11 @@
 import UIKit
 
 protocol PostsWireframeInterface: WireframeInterface {
+    static func assembleWireframe() -> PostsWireframe
+}
+
+protocol PostsRouterInterface: RouterInterface {
+    func navigateToPostDetail(with dataProvider: PostDataProviderInterface, postID: Int)
 }
 
 protocol PostsViewInterface: ViewInterface {
@@ -20,10 +25,21 @@ protocol PostsViewInterface: ViewInterface {
 protocol PostsPresenterInterface: PresenterInterface {
     func numberOfItems() -> Int
     func item(at index: Int) -> PostTableCellViewModelProtocol
+    
+    func didSelectItem(at index: Int)
 }
 
-protocol PostsInteractorInterface: InteractorInterface {
-    func getPosts(completion: @escaping ([PostViewModelProtocol]) -> Void)
+protocol PostsInteractorInputInterface: InteractorInterface {
+    func getPosts()
+    
+    func getNumberOfItems() -> Int
+    func getItem(at index: Int) -> PostViewModelProtocol
+    
+    func getDataProvider() -> PostDataProviderInterface
+}
+
+protocol PostsInteractorOutputInterface: InteractorInterface {
+    func postsReceived()
 }
 
 protocol PostTableCellViewModelProtocol {

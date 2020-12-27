@@ -61,12 +61,16 @@
 		16BB024B25975D8A00C2B48D /* PostDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB024525975D8A00C2B48D /* PostDetailInteractor.swift */; };
 		16BB024C25975D8A00C2B48D /* PostDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16BB024625975D8A00C2B48D /* PostDetailViewController.xib */; };
 		16BB024D25975D8A00C2B48D /* PostDetailWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB024725975D8A00C2B48D /* PostDetailWireframe.swift */; };
-		16BB025725975DE600C2B48D /* BaseWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB025225975DE600C2B48D /* BaseWireframe.swift */; };
 		16BB025925975DE600C2B48D /* PresenterInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB025425975DE600C2B48D /* PresenterInterface.swift */; };
 		16BB025A25975DE600C2B48D /* ViewInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB025525975DE600C2B48D /* ViewInterface.swift */; };
 		16BB025B25975DE600C2B48D /* InteractorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB025625975DE600C2B48D /* InteractorInterface.swift */; };
 		16BB026225975F9900C2B48D /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 16BB026125975F9900C2B48D /* NVActivityIndicatorView */; };
 		16BB026725975FA700C2B48D /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB026625975FA700C2B48D /* LoadingIndicator.swift */; };
+		16F0AC2D2598A8D600D76027 /* PostsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F0AC2C2598A8D600D76027 /* PostsRouter.swift */; };
+		16F0AC322598A92B00D76027 /* RouterInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F0AC312598A92B00D76027 /* RouterInterface.swift */; };
+		16F0AC3D2598AC9000D76027 /* WireframeInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F0AC3C2598AC9000D76027 /* WireframeInterface.swift */; };
+		16F0AC482598AE9E00D76027 /* UINavigationController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F0AC472598AE9E00D76027 /* UINavigationController+Extensions.swift */; };
+		16F0AC542598C02200D76027 /* PostDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F0AC532598C02200D76027 /* PostDetailRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,11 +150,15 @@
 		16BB024525975D8A00C2B48D /* PostDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailInteractor.swift; sourceTree = "<group>"; };
 		16BB024625975D8A00C2B48D /* PostDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostDetailViewController.xib; sourceTree = "<group>"; };
 		16BB024725975D8A00C2B48D /* PostDetailWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailWireframe.swift; sourceTree = "<group>"; };
-		16BB025225975DE600C2B48D /* BaseWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWireframe.swift; sourceTree = "<group>"; };
 		16BB025425975DE600C2B48D /* PresenterInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterInterface.swift; sourceTree = "<group>"; };
 		16BB025525975DE600C2B48D /* ViewInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewInterface.swift; sourceTree = "<group>"; };
 		16BB025625975DE600C2B48D /* InteractorInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractorInterface.swift; sourceTree = "<group>"; };
 		16BB026625975FA700C2B48D /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
+		16F0AC2C2598A8D600D76027 /* PostsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsRouter.swift; sourceTree = "<group>"; };
+		16F0AC312598A92B00D76027 /* RouterInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterInterface.swift; sourceTree = "<group>"; };
+		16F0AC3C2598AC9000D76027 /* WireframeInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireframeInterface.swift; sourceTree = "<group>"; };
+		16F0AC472598AE9E00D76027 /* UINavigationController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extensions.swift"; sourceTree = "<group>"; };
+		16F0AC532598C02200D76027 /* PostDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +206,7 @@
 				1621E93125977521004A117F /* UIViewController+Extensions.swift */,
 				16074EE7259879C000580D11 /* URL+Extensions.swift */,
 				16074EEC25987A5B00580D11 /* Optional+Extensions.swift */,
+				16F0AC472598AE9E00D76027 /* UINavigationController+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -271,14 +280,14 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		16699A4925989EE400CED5EF /* UI */ = {
+		16699A4925989EE400CED5EF /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
 				16699A4A25989EEC00CED5EF /* TableViewCell */,
 				16BB023225975D7C00C2B48D /* PostsViewController.swift */,
 				16BB023425975D7C00C2B48D /* PostsViewController.xib */,
 			);
-			path = UI;
+			path = UserInterface;
 			sourceTree = "<group>";
 		};
 		16699A4A25989EEC00CED5EF /* TableViewCell */ = {
@@ -409,10 +418,11 @@
 		16BB022E25975D4E00C2B48D /* Posts */ = {
 			isa = PBXGroup;
 			children = (
-				16699A4925989EE400CED5EF /* UI */,
+				16699A4925989EE400CED5EF /* UserInterface */,
 				16BB023025975D7C00C2B48D /* PostsInterfaces.swift */,
-				16BB023125975D7C00C2B48D /* PostsPresenter.swift */,
 				16BB023325975D7C00C2B48D /* PostsInteractor.swift */,
+				16BB023125975D7C00C2B48D /* PostsPresenter.swift */,
+				16F0AC2C2598A8D600D76027 /* PostsRouter.swift */,
 				16BB023525975D7C00C2B48D /* PostsWireframe.swift */,
 			);
 			path = Posts;
@@ -421,11 +431,11 @@
 		16BB022F25975D5C00C2B48D /* PostDetail */ = {
 			isa = PBXGroup;
 			children = (
+				16F0AC4F2598C00500D76027 /* UserInterface */,
 				16BB024225975D8A00C2B48D /* PostDetailInterfaces.swift */,
-				16BB024325975D8A00C2B48D /* PostDetailPresenter.swift */,
-				16BB024425975D8A00C2B48D /* PostDetailViewController.swift */,
 				16BB024525975D8A00C2B48D /* PostDetailInteractor.swift */,
-				16BB024625975D8A00C2B48D /* PostDetailViewController.xib */,
+				16BB024325975D8A00C2B48D /* PostDetailPresenter.swift */,
+				16F0AC532598C02200D76027 /* PostDetailRouter.swift */,
 				16BB024725975D8A00C2B48D /* PostDetailWireframe.swift */,
 			);
 			path = PostDetail;
@@ -434,10 +444,11 @@
 		16BB025125975DE600C2B48D /* ViperBase */ = {
 			isa = PBXGroup;
 			children = (
-				16BB025225975DE600C2B48D /* BaseWireframe.swift */,
-				16BB025425975DE600C2B48D /* PresenterInterface.swift */,
+				16F0AC3C2598AC9000D76027 /* WireframeInterface.swift */,
 				16BB025525975DE600C2B48D /* ViewInterface.swift */,
 				16BB025625975DE600C2B48D /* InteractorInterface.swift */,
+				16BB025425975DE600C2B48D /* PresenterInterface.swift */,
+				16F0AC312598A92B00D76027 /* RouterInterface.swift */,
 			);
 			path = ViperBase;
 			sourceTree = "<group>";
@@ -448,6 +459,15 @@
 				16BB026625975FA700C2B48D /* LoadingIndicator.swift */,
 			);
 			path = LoadingIndicator;
+			sourceTree = "<group>";
+		};
+		16F0AC4F2598C00500D76027 /* UserInterface */ = {
+			isa = PBXGroup;
+			children = (
+				16BB024425975D8A00C2B48D /* PostDetailViewController.swift */,
+				16BB024625975D8A00C2B48D /* PostDetailViewController.xib */,
+			);
+			path = UserInterface;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -593,6 +613,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16074E8F2597ED4000580D11 /* CommentViewModel.swift in Sources */,
+				16F0AC322598A92B00D76027 /* RouterInterface.swift in Sources */,
 				16BB023B25975D7C00C2B48D /* PostsWireframe.swift in Sources */,
 				16BB025B25975DE600C2B48D /* InteractorInterface.swift in Sources */,
 				16BB024A25975D8A00C2B48D /* PostDetailViewController.swift in Sources */,
@@ -610,9 +631,10 @@
 				16BB025A25975DE600C2B48D /* ViewInterface.swift in Sources */,
 				1621E98325979BC5004A117F /* PostAPIModel.swift in Sources */,
 				1621E958259787E9004A117F /* PersistenceLayerInterface.swift in Sources */,
+				16F0AC542598C02200D76027 /* PostDetailRouter.swift in Sources */,
 				16BB018F259752F800C2B48D /* AppDelegate.swift in Sources */,
 				16074E8A2597ED3900580D11 /* PostViewModel.swift in Sources */,
-				16BB025725975DE600C2B48D /* BaseWireframe.swift in Sources */,
+				16F0AC3D2598AC9000D76027 /* WireframeInterface.swift in Sources */,
 				1621E95F259788AB004A117F /* NotificationNameWrapper.swift in Sources */,
 				16BB023625975D7C00C2B48D /* PostsInterfaces.swift in Sources */,
 				16699A34259888B100CED5EF /* UserViewModel.swift in Sources */,
@@ -624,11 +646,13 @@
 				1621E93525977521004A117F /* UITableViewCell+Extensions.swift in Sources */,
 				1621E959259787E9004A117F /* CoreDataStack.swift in Sources */,
 				165406022597D97900435149 /* APIErrorHandler.swift in Sources */,
+				16F0AC2D2598A8D600D76027 /* PostsRouter.swift in Sources */,
 				16BB026725975FA700C2B48D /* LoadingIndicator.swift in Sources */,
 				16074EE12597F7FC00580D11 /* Post+CoreDataProperties.swift in Sources */,
 				1621E93425977521004A117F /* UIViewController+Extensions.swift in Sources */,
 				16BB0191259752F800C2B48D /* SceneDelegate.swift in Sources */,
 				16BB025925975DE600C2B48D /* PresenterInterface.swift in Sources */,
+				16F0AC482598AE9E00D76027 /* UINavigationController+Extensions.swift in Sources */,
 				16074EE32597F7FC00580D11 /* Comment+CoreDataProperties.swift in Sources */,
 				16074EE02597F7FC00580D11 /* Post+CoreDataClass.swift in Sources */,
 				16074EED25987A5B00580D11 /* Optional+Extensions.swift in Sources */,

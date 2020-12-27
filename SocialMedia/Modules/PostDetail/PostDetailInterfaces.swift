@@ -11,13 +11,24 @@
 import UIKit
 
 protocol PostDetailWireframeInterface: WireframeInterface {
+    static func assembleWireframe(with dataProvider: PostDataProviderInterface, postID: Int) -> PostDetailWireframe
+}
+
+protocol PostDetailRouterInterface: RouterInterface {
+    func navigateToBack()
 }
 
 protocol PostDetailViewInterface: ViewInterface {
+    func reloadInterface()
 }
 
-protocol PostDetailPresenterInterface: PresenterInterface {
+protocol PostDetailPresenterInterface: PresenterInterface {}
+
+protocol PostDetailInteractorInputInterface: InteractorInterface {
+    func getComments(for postID: Int)
 }
 
-protocol PostDetailInteractorInterface: InteractorInterface {
+protocol PostDetailInteractorOutputInterface: InteractorInterface {
+    func commentsReceived(comments: [CommentViewModelProtocol])
 }
+

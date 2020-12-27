@@ -15,21 +15,18 @@ final class PostsPresenter {
     // MARK: - Private properties -
 
     private unowned let view: PostsViewInterface
-    private let interactor: PostsInteractorInterface
-    private let dataStore: PostDataStoreProtocol
-    private let wireframe: PostsWireframeInterface
+    private let interactor: PostsInteractorInputInterface
+    private let router: PostsRouterInterface
     
     // MARK: - Lifecycle -
 
     init(view: PostsViewInterface,
-         interactor: PostsInteractorInterface,
-         dataStore: PostDataStoreProtocol,
-         wireframe: PostsWireframeInterface) {
+         interactor: PostsInteractorInputInterface,
+         router: PostsRouterInterface) {
         
         self.view = view
         self.interactor = interactor
-        self.dataStore = dataStore
-        self.wireframe = wireframe
+        self.router = router
     }
 }
 
@@ -37,17 +34,29 @@ final class PostsPresenter {
 
 extension PostsPresenter: PostsPresenterInterface {
     func viewDidLoad() {
-        interactor.getPosts { [weak self] _ in
-            self?.view.reloadInterface()
-        }
+        view.showProgressHUD()
+        interactor.getPosts()
     }
     
     func numberOfItems() -> Int {
-        return dataStore.postViewModels.count
+        return interactor.getNumberOfItems()
     }
     
     func item(at index: Int) -> PostTableCellViewModelProtocol {
-        let post = dataStore.postViewModels[index]
+        let post = interactor.getItem(at: index)
         return PostTableCellViewModel(title: post.title)
+    }
+    
+    func didSelectItem(at index: Int) {
+        let dataProvider = interactor.getDataProvider()
+        let post = interactor.getItem(at: index)
+        router.navigateToPostDetail(with: dataProvider, postID: post.postID)
+    }
+}
+
+extension PostsPresenter: PostsInteractorOutputInterface {
+    func postsReceived() {
+        view.hideProgressHUD()
+        view.reloadInterface()
     }
 }

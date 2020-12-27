@@ -11,9 +11,20 @@
 import Foundation
 
 final class PostDetailInteractor {
+    private let dataProvider: PostDataProviderInterface
+    weak var output: PostDetailInteractorOutputInterface!
+    
+    init(dataProvider: PostDataProviderInterface) {
+        self.dataProvider = dataProvider
+    }
 }
 
 // MARK: - Extensions -
 
-extension PostDetailInteractor: PostDetailInteractorInterface {
+extension PostDetailInteractor: PostDetailInteractorInputInterface {
+    func getComments(for postID: Int) {
+        dataProvider.fetchComments(for: postID) { [weak self] comments in
+            self?.output.commentsReceived(comments: comments)
+        }
+    }
 }

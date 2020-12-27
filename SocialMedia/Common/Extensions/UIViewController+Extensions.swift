@@ -16,3 +16,9 @@ extension UIViewController {
     return instantiateFromNib()
   }
 }
+
+extension UIViewController {
+    func presentWireframe(_ wireframe: WireframeInterface, animated: Bool = true, completion: (() -> Void)? = nil) {
+        present(wireframe.viewController, animated: animated, completion: completion)
+    }
+}

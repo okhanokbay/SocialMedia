@@ -20,11 +20,15 @@ final class PostDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        presenter.viewDidLoad()
     }
-
 }
 
 // MARK: - Extensions -
 
 extension PostDetailViewController: PostDetailViewInterface {
+    func reloadInterface() {
+        
+    }
 }

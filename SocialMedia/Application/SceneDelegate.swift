@@ -14,7 +14,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let postsNavigationController = PostsNavigationController()
-        postsNavigationController.setRootWireframe(PostsWireframe())
+        let rootWireframe = PostsWireframe.assembleWireframe()
+        postsNavigationController.setRootWireframe(rootWireframe)
         
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = postsNavigationController

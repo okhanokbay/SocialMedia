@@ -10,22 +10,25 @@
 
 import UIKit
 
-final class PostDetailWireframe: BaseWireframe {
-
-    // MARK: - Module setup -
-
-    init() {
-        let moduleViewController = PostDetailViewController()
-        super.init(viewController: moduleViewController)
-
-        let interactor = PostDetailInteractor()
-        let presenter = PostDetailPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
-        moduleViewController.presenter = presenter
-    }
-
-}
-
-// MARK: - Extensions -
+final class PostDetailWireframe: BaseWireframe {}
 
 extension PostDetailWireframe: PostDetailWireframeInterface {
+    // MARK: - Module setup -
+    
+    static func assembleWireframe(with dataProvider: PostDataProviderInterface, postID: Int) -> PostDetailWireframe {
+        let viewController = PostDetailViewController.loadFromNib()
+        let wireframe = PostDetailWireframe(viewController: viewController)
+        
+        let router = PostDetailRouter(viewController: viewController)
+        let interactor = PostDetailInteractor(dataProvider: dataProvider)
+        let presenter = PostDetailPresenter(view: viewController,
+                                            interactor: interactor,
+                                            router: router,
+                                            postID: postID)
+        
+        interactor.output = presenter
+        viewController.presenter = presenter
+        
+        return wireframe
+    }
 }

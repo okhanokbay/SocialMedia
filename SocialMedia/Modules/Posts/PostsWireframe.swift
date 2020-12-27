@@ -10,14 +10,15 @@
 
 import UIKit
 
-final class PostsWireframe: BaseWireframe {
+final class PostsWireframe: BaseWireframe {}
 
+extension PostsWireframe: PostsWireframeInterface {
     // MARK: - Module setup -
     
-    init() {
-        let moduleViewController = PostsViewController.loadFromNib()
-        super.init(viewController: moduleViewController)
-
+    static func assembleWireframe() -> PostsWireframe {
+        let viewController = PostsViewController.loadFromNib()
+        let wireframe = PostsWireframe(viewController: viewController)
+        
         let apiResponseHandler = APIResponseHandler()
         let apiErrorHandler = APIErrorHandler()
         let apiLayer = APILayer(apiResponseHandler: apiResponseHandler)
@@ -26,25 +27,22 @@ final class PostsWireframe: BaseWireframe {
         let dataStore = PostDataStore()
         
         let dataProvider = PostDataProvider(apiLayer: apiLayer,
-                                        apiResponseHandler: apiResponseHandler,
-                                        apiErrorHandler: apiErrorHandler,
-                                        persistenceLayerOutput: persistenceLayer,
-                                        persistenceLayerInput: persistenceLayer,
-                                        dataStore: dataStore)
+                                            apiResponseHandler: apiResponseHandler,
+                                            apiErrorHandler: apiErrorHandler,
+                                            persistenceLayerCreate: persistenceLayer,
+                                            persistenceLayerRead: persistenceLayer,
+                                            persistenceLayerUpdate: persistenceLayer,
+                                            dataStore: dataStore)
         
+        let router = PostsRouter(viewController: viewController)
         let interactor = PostsInteractor(dataProvider: dataProvider)
-        
-        let presenter = PostsPresenter(view: moduleViewController,
+        let presenter = PostsPresenter(view: viewController,
                                        interactor: interactor,
-                                       dataStore: dataStore,
-                                       wireframe: self)
+                                       router: router)
         
-        moduleViewController.presenter = presenter
+        interactor.output = presenter
+        viewController.presenter = presenter
+        
+        return wireframe
     }
-
-}
-
-// MARK: - Extensions -
-
-extension PostsWireframe: PostsWireframeInterface {
 }
