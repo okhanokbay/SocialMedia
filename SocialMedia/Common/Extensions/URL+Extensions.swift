@@ -2,7 +2,7 @@
 //  URL+Extensions.swift
 //  SocialMedia
 //
-//  Created by Okhan Okbay on 27.12.2020.
+//  Created by John Sundell
 //
 
 import Foundation

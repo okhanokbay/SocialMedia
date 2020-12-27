@@ -7,33 +7,37 @@
 
 import Foundation
 
-struct PostViewModel {
+protocol PostViewModelProtocol {
+    var userID: Int { get }
+    var postID: Int { get }
+    var title: String { get }
+    var body: String { get }
+    var name: String { get }
+    var username: String { get }
+    var comments: [CommentViewModelProtocol] { get }
+}
+
+struct PostViewModel: PostViewModelProtocol {
     let userID: Int
     let postID: Int
     let title: String
     let body: String
     let name: String
     let username: String
-    var comments: Set<CommentViewModel>
+    let comments: [CommentViewModelProtocol]
     
     init(with postAPIResponse: PostAPIResponse,
-        userAPIResponse: UserAPIResponse,
-        commentsAPIResponse: [CommentAPIResponse]) {
+        user: UserViewModelProtocol,
+        comments: [CommentViewModelProtocol]) {
         
         userID = postAPIResponse.userID
         postID = postAPIResponse.postID
         title = postAPIResponse.title
         body = postAPIResponse.body
         
-        name = userAPIResponse.name
-        username = userAPIResponse.username
+        name = user.name
+        username = user.username
         
-        comments = Set(commentsAPIResponse.map(CommentViewModel.init))
-    }
-}
-
-extension PostViewModel: PostMediationProtocol {
-    var allComments: [CommentMediationProtocol] {
-        return Array(comments)
+        self.comments = comments
     }
 }

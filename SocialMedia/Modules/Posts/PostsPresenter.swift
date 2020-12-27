@@ -31,6 +31,8 @@ final class PostsPresenter {
 
 extension PostsPresenter: PostsPresenterInterface {
     func viewDidLoad() {
-        
+        interactor.getPosts { posts in
+            print(posts)
+        }
     }
 }

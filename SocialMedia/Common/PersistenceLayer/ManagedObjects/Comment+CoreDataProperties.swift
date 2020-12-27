@@ -22,8 +22,8 @@ extension Comment {
     @NSManaged public var inPost: Post
 }
 
-extension Comment: CommentMediationProtocol {
-    static func makeSelf(from comment: CommentMediationProtocol,
+extension Comment: CommentViewModelProtocol {
+    static func makeSelf(from comment: CommentViewModelProtocol,
                          in post: Post,
                          context: NSManagedObjectContext) -> Comment {
         

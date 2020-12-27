@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-// MARK: - Core Data stack
+// MARK: - Core Data stack -
 
 final class CoreDataStack {
     static let shared: CoreDataStack = .init()
@@ -35,7 +35,7 @@ final class CoreDataStack {
     }
 }
 
-// MARK: - Core Data Saving support
+// MARK: - Core Data Saving support -
 
 extension CoreDataStack {
     func save(context: NSManagedObjectContext) {
@@ -53,10 +53,10 @@ extension CoreDataStack {
     }
 }
 
-// MARK: Core Data Helper Methods
+// MARK: - Core Data Helper Methods -
 
 extension CoreDataStack: PersistenceLayerInterface {
-    func fetchPosts(completion: @escaping ([PostMediationProtocol]) -> Void) {
+    func fetchPosts(completion: @escaping ([PostViewModelProtocol]) -> Void) {
         let request = Post.createFetchRequest()
         persistentContainer.performBackgroundTask { [weak self] backgroundContext in
             guard let self = self else { return }
@@ -64,7 +64,7 @@ extension CoreDataStack: PersistenceLayerInterface {
         }
     }
     
-    func save(posts: [PostMediationProtocol],
+    func save(posts: [PostViewModelProtocol],
               completion: ((_ isSuccess: Bool) -> Void)? = nil) {
         
         persistentContainer.performBackgroundTask { [weak self] backgroundContext in
@@ -78,8 +78,8 @@ extension CoreDataStack: PersistenceLayerInterface {
         }
     }
     
-    func update(post: PostMediationProtocol,
-                with comments: [CommentMediationProtocol],
+    func update(post: PostViewModelProtocol,
+                with comments: [CommentViewModelProtocol],
                 completion: ((_ isSuccess: Bool) -> Void)? = nil) {
         
         let request = Post.createFetchRequest()
@@ -90,7 +90,7 @@ extension CoreDataStack: PersistenceLayerInterface {
             if let managedPost = try? backgroundContext.fetch(request).first {
                 let oldPost = Post.makeSelf(from: post, context: backgroundContext)
                 
-                managedPost.comments = Set(comments.map { Comment.makeSelf(from: $0,
+                managedPost.postComments = Set(comments.map { Comment.makeSelf(from: $0,
                                                                        in: oldPost,
                                                                        context: backgroundContext) })
                 completion?(true)
@@ -101,7 +101,7 @@ extension CoreDataStack: PersistenceLayerInterface {
         }
     }
     
-    func fetchComments(for postID: Int, completion: (([CommentMediationProtocol]) -> Void)? = nil) {
+    func fetchComments(for postID: Int, completion: (([CommentViewModelProtocol]) -> Void)? = nil) {
         let request = Comment.createFetchRequest()
         let predicate = NSPredicate(format: "postID = %@", postID)
         request.predicate = predicate

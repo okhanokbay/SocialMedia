@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		16074E732597E91F00580D11 /* PostMediationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16074E722597E91F00580D11 /* PostMediationProtocol.swift */; };
-		16074E7B2597E93200580D11 /* CommentMediationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16074E7A2597E93200580D11 /* CommentMediationProtocol.swift */; };
 		16074E8A2597ED3900580D11 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16074E892597ED3900580D11 /* PostViewModel.swift */; };
 		16074E8F2597ED4000580D11 /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16074E8E2597ED4000580D11 /* CommentViewModel.swift */; };
 		16074EE02597F7FC00580D11 /* Post+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16074EDC2597F7FC00580D11 /* Post+CoreDataClass.swift */; };
@@ -39,6 +37,8 @@
 		1654060C2597D9CB00435149 /* AlertFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1654060A2597D9CB00435149 /* AlertFactory.swift */; };
 		165406162597DA1F00435149 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165406152597DA1F00435149 /* Strings.swift */; };
 		1654061B2597DA2E00435149 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1654061A2597DA2E00435149 /* Colors.swift */; };
+		16699A2F2598884600CED5EF /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16699A2E2598884600CED5EF /* DataStore.swift */; };
+		16699A34259888B100CED5EF /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16699A33259888B100CED5EF /* UserViewModel.swift */; };
 		16BB018F259752F800C2B48D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB018E259752F800C2B48D /* AppDelegate.swift */; };
 		16BB0191259752F800C2B48D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB0190259752F800C2B48D /* SceneDelegate.swift */; };
 		16BB0199259752F800C2B48D /* SocialMedia.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 16BB0197259752F800C2B48D /* SocialMedia.xcdatamodeld */; };
@@ -85,8 +85,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		16074E722597E91F00580D11 /* PostMediationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMediationProtocol.swift; sourceTree = "<group>"; };
-		16074E7A2597E93200580D11 /* CommentMediationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentMediationProtocol.swift; sourceTree = "<group>"; };
 		16074E892597ED3900580D11 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		16074E8E2597ED4000580D11 /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
 		16074EDC2597F7FC00580D11 /* Post+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -116,6 +114,8 @@
 		1654060A2597D9CB00435149 /* AlertFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertFactory.swift; sourceTree = "<group>"; };
 		165406152597DA1F00435149 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		1654061A2597DA2E00435149 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		16699A2E2598884600CED5EF /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		16699A33259888B100CED5EF /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		16BB018B259752F800C2B48D /* SocialMedia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialMedia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16BB018E259752F800C2B48D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		16BB0190259752F800C2B48D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -181,6 +181,7 @@
 			children = (
 				16074E892597ED3900580D11 /* PostViewModel.swift */,
 				16074E8E2597ED4000580D11 /* CommentViewModel.swift */,
+				16699A33259888B100CED5EF /* UserViewModel.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -204,8 +205,6 @@
 				16BB0197259752F800C2B48D /* SocialMedia.xcdatamodeld */,
 				1621E957259787E9004A117F /* CoreDataStack.swift */,
 				1621E956259787E9004A117F /* PersistenceLayerInterface.swift */,
-				16074E722597E91F00580D11 /* PostMediationProtocol.swift */,
-				16074E7A2597E93200580D11 /* CommentMediationProtocol.swift */,
 			);
 			path = PersistenceLayer;
 			sourceTree = "<group>";
@@ -235,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				1621E97225979A37004A117F /* DataProvider.swift */,
+				16699A2E2598884600CED5EF /* DataStore.swift */,
 			);
 			path = DataProvider;
 			sourceTree = "<group>";
@@ -570,7 +570,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				16074E8F2597ED4000580D11 /* CommentViewModel.swift in Sources */,
-				16074E7B2597E93200580D11 /* CommentMediationProtocol.swift in Sources */,
 				16BB023B25975D7C00C2B48D /* PostsWireframe.swift in Sources */,
 				16BB025B25975DE600C2B48D /* InteractorInterface.swift in Sources */,
 				16BB024A25975D8A00C2B48D /* PostDetailViewController.swift in Sources */,
@@ -583,6 +582,7 @@
 				1621E94E2597764C004A117F /* PostsNavigationController.swift in Sources */,
 				1621E97325979A37004A117F /* DataProvider.swift in Sources */,
 				1654060B2597D9CB00435149 /* AlertViewModel.swift in Sources */,
+				16699A2F2598884600CED5EF /* DataStore.swift in Sources */,
 				16BB025A25975DE600C2B48D /* ViewInterface.swift in Sources */,
 				1621E98325979BC5004A117F /* PostAPIModel.swift in Sources */,
 				1621E958259787E9004A117F /* PersistenceLayerInterface.swift in Sources */,
@@ -591,6 +591,7 @@
 				16BB025725975DE600C2B48D /* BaseWireframe.swift in Sources */,
 				1621E95F259788AB004A117F /* NotificationNameWrapper.swift in Sources */,
 				16BB023625975D7C00C2B48D /* PostsInterfaces.swift in Sources */,
+				16699A34259888B100CED5EF /* UserViewModel.swift in Sources */,
 				16BB023925975D7C00C2B48D /* PostsInteractor.swift in Sources */,
 				1621E93625977521004A117F /* UIView+Extensions.swift in Sources */,
 				16BB024925975D8A00C2B48D /* PostDetailPresenter.swift in Sources */,
@@ -610,7 +611,6 @@
 				16BB023725975D7C00C2B48D /* PostsPresenter.swift in Sources */,
 				1654061B2597DA2E00435149 /* Colors.swift in Sources */,
 				16BB024B25975D8A00C2B48D /* PostDetailInteractor.swift in Sources */,
-				16074E732597E91F00580D11 /* PostMediationProtocol.swift in Sources */,
 				165406162597DA1F00435149 /* Strings.swift in Sources */,
 				1621E99025979D72004A117F /* CommentAPIModel.swift in Sources */,
 				1621E97D25979AB9004A117F /* APIError.swift in Sources */,

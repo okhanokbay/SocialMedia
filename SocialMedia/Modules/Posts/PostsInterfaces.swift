@@ -20,4 +20,5 @@ protocol PostsPresenterInterface: PresenterInterface {
 }
 
 protocol PostsInteractorInterface: InteractorInterface {
+    func getPosts(completion: @escaping ([PostViewModelProtocol]) -> Void)
 }

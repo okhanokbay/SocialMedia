@@ -21,4 +21,7 @@ final class PostsInteractor {
 // MARK: - Extensions -
 
 extension PostsInteractor: PostsInteractorInterface {
+    func getPosts(completion: @escaping ([PostViewModelProtocol]) -> Void) {
+        dataProvider.getPosts(completion: completion)
+    }
 }

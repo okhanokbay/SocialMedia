@@ -23,11 +23,13 @@ final class PostsWireframe: BaseWireframe {
         let apiLayer = APILayer(apiResponseHandler: apiResponseHandler)
         
         let persistenceLayer = CoreDataStack()
+        let dataStore = DataStore()
         
         let dataProvider = DataProvider(apiLayer: apiLayer,
                                         apiResponseHandler: apiResponseHandler,
                                         apiErrorHandler: apiErrorHandler,
-                                        persistenceLayer: persistenceLayer)
+                                        persistenceLayer: persistenceLayer,
+                                        dataStore: dataStore)
         
         let interactor = PostsInteractor(dataProvider: dataProvider)
         let presenter = PostsPresenter(view: moduleViewController, interactor: interactor, wireframe: self)
