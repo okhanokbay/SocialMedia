@@ -12,6 +12,8 @@ import UIKit
 
 final class PostDetailViewController: UIViewController {
 
+    @IBOutlet private weak var tableView: UITableView!
+    
     // MARK: - Public properties -
 
     var presenter: PostDetailPresenterInterface!

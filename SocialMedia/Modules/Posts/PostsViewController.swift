@@ -11,7 +11,6 @@
 import UIKit
 
 final class PostsViewController: UIViewController {
-    
     @IBOutlet private weak var tableView: UITableView!
     
     // MARK: - Public properties -
@@ -25,7 +24,14 @@ final class PostsViewController: UIViewController {
         
         setupTableView()
         presenter.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
+        if let selectedRow = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: selectedRow, animated: true)
+        }
     }
 }
 

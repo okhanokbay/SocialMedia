@@ -48,12 +48,32 @@ final class MultiPurposeTableViewCell: UITableViewCell {
     @IBOutlet private weak var rightContainerView: UIView!
     @IBOutlet private weak var rightImageView: UIImageView!
     
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        
+        setBackgroundColor(for: highlighted)
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        setBackgroundColor(for: selected)
+    }
+    
+    private func setBackgroundColor(for activeStatus: Bool) {
+        contentView.backgroundColor = activeStatus ? .systemYellow : .systemGray6
+    }
+    
     func configure(with viewModel: MultiPurposeTableCellViewModelable) {
         setupLeftImage(with: viewModel)
         setupLabels(with: viewModel)
         setupRightView(with: viewModel)
     }
-    
+}
+
+// MARK: - Helpers -
+
+extension MultiPurposeTableViewCell {
     private func setupLeftImage(with viewModel: MultiPurposeTableCellViewModelable) {
         if let leftImage = viewModel.leftImage {
             leftImageView.image = leftImage
