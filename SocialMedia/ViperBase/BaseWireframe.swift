@@ -13,7 +13,6 @@ protocol WireframeInterface: AnyObject {
 
     func showErrorAlert(with message: String)
     func showAlert(with title: String, message: String)
-    func showAlert(with title: String?, message: String?, actions: [UIAlertAction])
 }
 
 class BaseWireframe {
@@ -45,12 +44,6 @@ extension BaseWireframe: WireframeInterface {
     func showAlert(with title: String, message: String) {
         let alertViewModel = AlertViewModel(title: title, message: message, buttonText: Strings.Alert.ok.rawValue)
         navigationController?.present(alertViewModel.alertController, animated: true, completion: nil)
-    }
-
-    func showAlert(with title: String?, message: String?, actions: [UIAlertAction]) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        actions.forEach { alert.addAction($0) }
-        navigationController?.present(alert, animated: true, completion: nil)
     }
 }
 

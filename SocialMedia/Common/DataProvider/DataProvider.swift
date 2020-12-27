@@ -7,12 +7,22 @@
 
 import Foundation
 
-final class DataProvider {
-    private let apiLayer: APILayerInterface
-    private let apiResponseHandler: APIResponseHandlerInterface
-    private let apiErrorHandler: APIErrorHandlerInterface
+protocol DataProviderInterface: AnyObject {
+    var apiLayer: APILayerInterface { get }
+    var apiResponseHandler: APIResponseHandlerInterface { get }
+    var apiErrorHandler: APIErrorHandlerInterface { get }
+
+    var persistenceLayer: PersistenceLayerInterface { get }
     
-    private let persistenceLayer: PersistenceLayerInterface
+    func getPosts(completion: @escaping ([PostViewModel]?) -> Void)
+}
+
+final class DataProvider: DataProviderInterface {
+    let apiLayer: APILayerInterface
+    let apiResponseHandler: APIResponseHandlerInterface
+    let apiErrorHandler: APIErrorHandlerInterface
+    
+    let persistenceLayer: PersistenceLayerInterface
     
     init(apiLayer: APILayerInterface,
          apiResponseHandler: APIResponseHandlerInterface,
@@ -25,7 +35,11 @@ final class DataProvider {
         
         self.persistenceLayer = persistenceLayer
     }
-    
+}
+
+// MARK: - Post Data Providing -
+
+extension DataProvider {
     func getPosts(completion: @escaping ([PostViewModel]?) -> Void) {
         
         let taskGroup = DispatchGroup()

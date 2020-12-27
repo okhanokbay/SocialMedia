@@ -22,10 +22,12 @@ final class PostsViewController: UIViewController {
         super.viewDidLoad()
         
         presenter.viewDidLoad()
+        
     }
 }
 
 // MARK: - Extensions -
 
 extension PostsViewController: PostsViewInterface {
+    
 }
