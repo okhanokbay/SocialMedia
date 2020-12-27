@@ -34,7 +34,9 @@ final class PostsPresenter {
 
 extension PostsPresenter: PostsPresenterInterface {
     func viewDidLoad() {
+        view.setTitle(Strings.PostsPage.title.rawValue)
         view.showProgressHUD()
+        
         interactor.getPosts()
     }
     
@@ -42,9 +44,9 @@ extension PostsPresenter: PostsPresenterInterface {
         return interactor.getNumberOfItems()
     }
     
-    func item(at index: Int) -> PostTableCellViewModelProtocol {
+    func item(at index: Int) -> MultiPurposeTableCellViewModelable {
         let post = interactor.getItem(at: index)
-        return PostTableCellViewModel(title: post.title)
+        return MultiPurposeTableCellViewModel(firstText: post.title, disclosureIndicatorType: .normal)
     }
     
     func didSelectItem(at index: Int) {

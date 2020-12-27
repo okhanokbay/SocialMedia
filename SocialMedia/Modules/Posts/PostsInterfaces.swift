@@ -11,6 +11,7 @@
 import UIKit
 
 protocol PostsViewInterface: ViewInterface {
+    func setTitle(_ title: String)
     func reloadInterface()
 }
 
@@ -29,7 +30,7 @@ protocol PostsInteractorOutputInterface: InteractorInterface {
 
 protocol PostsPresenterInterface: PresenterInterface {
     func numberOfItems() -> Int
-    func item(at index: Int) -> PostTableCellViewModelProtocol
+    func item(at index: Int) -> MultiPurposeTableCellViewModelable
     
     func didSelectItem(at index: Int)
 }

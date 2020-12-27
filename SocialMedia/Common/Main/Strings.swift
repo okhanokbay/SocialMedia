@@ -12,4 +12,8 @@ struct Strings {
         case error = "Error"
         case ok = "OK"
     }
+    
+    enum PostsPage: String {
+        case title = "Posts"
+    }
 }

@@ -52,12 +52,14 @@ extension PostDataProvider {
             guard localPosts.count == 0 else {
                 self.dataStore.postViewModels = localPosts
                 completion(localPosts)
+                print("Using posts from local warehouse")
                 return
             }
             
             self.fetchPostsFromAPI { remotePosts in
                 self.dataStore.postViewModels = remotePosts
                 completion(remotePosts)
+                print("Using posts from remote server")
                 
                 self.persistenceLayer.save(posts: remotePosts) { isSuccess in
                     print("Remote posts \(isSuccess ? "successfully" : "could not be") saved into local warehouse")
@@ -142,12 +144,14 @@ extension PostDataProvider {
             guard localComments.count == 0 else {
                 self.dataStore.commentViewModels = localComments
                 completion(localComments)
+                print("Using comments from local warehouse")
                 return
             }
             
             self.fetchCommentsFromAPI(for: post) { remoteComments in
                 self.dataStore.commentViewModels = remoteComments
                 completion(remoteComments)
+                print("Using comments from remote server")
                 
                 self.persistenceLayer.update(post: post, with: remoteComments) { isSuccess in
                     print("Remote comments \(isSuccess ? "successfully" : "could not be") saved into local warehouse")

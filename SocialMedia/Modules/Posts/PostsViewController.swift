@@ -11,13 +11,13 @@
 import UIKit
 
 final class PostsViewController: UIViewController {
-
+    
     @IBOutlet private weak var tableView: UITableView!
     
     // MARK: - Public properties -
-
+    
     var presenter: PostsPresenterInterface!
-
+    
     // MARK: - Lifecycle -
     
     override func viewDidLoad() {
@@ -32,6 +32,10 @@ final class PostsViewController: UIViewController {
 // MARK: - PostsViewInterface -
 
 extension PostsViewController: PostsViewInterface {
+    func setTitle(_ title: String) {
+        self.title = title
+    }
+    
     func reloadInterface() {
         tableView.reloadData()
     }
@@ -46,7 +50,7 @@ extension PostsViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        tableView.register(PostTableViewCell.nib, forCellReuseIdentifier: PostTableViewCell.reuseIdentifier)
+        tableView.register(MultiPurposeTableViewCell.nib, forCellReuseIdentifier: MultiPurposeTableViewCell.reuseIdentifier)
     }
 }
 
@@ -59,8 +63,8 @@ extension PostsViewController: UITableViewDataSource {
         let viewModel = presenter.item(at: indexPath.row)
         
         // Force casted depending on this convo here: https://stackoverflow.com/questions/44168134/how-to-correct-avoid-this-force-cast
-        let cell: PostTableViewCell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.reuseIdentifier,
-                                                                    for: indexPath) as! PostTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: MultiPurposeTableViewCell.reuseIdentifier,
+                                                 for: indexPath) as! MultiPurposeTableViewCell
         cell.configure(with: viewModel)
         return cell
     }
@@ -69,5 +73,9 @@ extension PostsViewController: UITableViewDataSource {
 extension PostsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.didSelectItem(at: indexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }
