@@ -11,30 +11,30 @@ import NVActivityIndicatorView
 final class LoadingIndicator {
     static let shared = LoadingIndicator()
     
-    private let loadingWindow: UIWindow
+    private let progressHUD: UIView
+    private let indicator: NVActivityIndicatorView
     
-    init(dimension: CGFloat = 44) {
-        loadingWindow = UIWindow(frame: UIScreen.main.bounds)
-        loadingWindow.backgroundColor = UIColor.darkGray.withAlphaComponent(0.5)
-        var frame = loadingWindow.frame
-        frame.size.height = dimension
-        frame.size.width = dimension
+    init(dimension: CGFloat = 44 ) {
+        let frame = CGRect(x: 0, y: 0, width: dimension, height: dimension)
+        indicator = NVActivityIndicatorView(frame: frame, type: .ballScaleMultiple, color: .brown, padding: nil)
         
-        let indicator = NVActivityIndicatorView(frame: frame, type: .ballScaleMultiple, color: .blue, padding: nil)
-        loadingWindow.addSubview(indicator)
-        indicator.center = loadingWindow.center
+        progressHUD = UIView(frame: .zero)
+        progressHUD.backgroundColor = UIColor.darkGray.withAlphaComponent(0.5)
+        progressHUD.addSubview(indicator)
+    }
+    
+    func showLoading(on view: UIView) {
+        progressHUD.frame = view.frame
+        indicator.center = progressHUD.center
+        
+        view.addSubview(progressHUD)
+        view.bringSubviewToFront(progressHUD)
+        
         indicator.startAnimating()
     }
     
-    func showLoading() {
-        DispatchQueue.main.async {
-            self.loadingWindow.isHidden = false
-        }
-    }
-    
     func hideLoading() {
-        DispatchQueue.main.async {
-            self.loadingWindow.isHidden = true
-        }
+        progressHUD.removeFromSuperview()
+        indicator.stopAnimating()
     }
 }

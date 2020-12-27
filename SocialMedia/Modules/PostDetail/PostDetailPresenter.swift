@@ -40,10 +40,13 @@ final class PostDetailPresenter {
 
 extension PostDetailPresenter: PostDetailPresenterInterface {
     func viewDidLoad() {
-        view.setTitle(Strings.Post.detailTitle.rawValue)
-        view.showProgressHUD()
+        DispatchQueue.main.async {
+            self.view.setTitle(Strings.Post.detailTitle.rawValue)
+            self.view.showProgressHUD()
+        }
         
         setupInitialCellViewModels()
+        
         interactor.getComments(for: post)
     }
     

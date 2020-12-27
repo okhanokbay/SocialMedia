@@ -32,6 +32,10 @@ final class PostDetailViewController: UIViewController {
 // MARK: - PostDetailViewInterface -
 
 extension PostDetailViewController: PostDetailViewInterface {
+    func showProgressHUD() {
+        showProgressHUD(on: view)
+    }
+    
     func setTitle(_ title: String) {
         self.title = title
     }

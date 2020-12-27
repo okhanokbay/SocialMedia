@@ -36,8 +36,10 @@ final class PostsPresenter {
 
 extension PostsPresenter: PostsPresenterInterface {
     func viewDidLoad() {
-        view.setTitle(Strings.Post.title.rawValue)
-        view.showProgressHUD()
+        DispatchQueue.main.async {
+            self.view.setTitle(Strings.Post.title.rawValue)
+            self.view.showProgressHUD()
+        }
         
         interactor.getPosts()
     }
@@ -53,7 +55,10 @@ extension PostsPresenter: PostsPresenterInterface {
     func didSelectItem(at index: Int) {
         let dataProvider = interactor.getDataProvider()
         let post = interactor.getItem(at: index)
-        router.navigateToPostDetail(with: dataProvider, post: post)
+        
+        DispatchQueue.main.async {
+            self.router.navigateToPostDetail(with: dataProvider, post: post)
+        }
     }
 }
 

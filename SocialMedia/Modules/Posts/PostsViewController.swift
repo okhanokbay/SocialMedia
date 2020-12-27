@@ -38,6 +38,10 @@ final class PostsViewController: UIViewController {
 // MARK: - PostsViewInterface -
 
 extension PostsViewController: PostsViewInterface {
+    func showProgressHUD() {
+        showProgressHUD(on: view)
+    }
+    
     func setTitle(_ title: String) {
         self.title = title
     }

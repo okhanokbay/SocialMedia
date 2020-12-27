@@ -14,8 +14,8 @@ protocol ViewInterface: AnyObject {
 }
 
 extension ViewInterface {
-    func showProgressHUD() {
-        LoadingIndicator.shared.showLoading()
+    func showProgressHUD(on view: UIView) {
+        LoadingIndicator.shared.showLoading(on: view)
     }
 
     func hideProgressHUD() {

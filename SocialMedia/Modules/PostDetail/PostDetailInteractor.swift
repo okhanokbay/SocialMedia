@@ -23,8 +23,10 @@ final class PostDetailInteractor {
 
 extension PostDetailInteractor: PostDetailInteractorInputInterface {
     func getComments(for post: PostViewModelProtocol) {
-        dataProvider.fetchComments(for: post) { [weak self] comments in
-            self?.output.commentsReceived(comments: comments)
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.dataProvider.fetchComments(for: post) { [weak self] comments in
+                self?.output.commentsReceived(comments: comments)
+            }
         }
     }
 }
