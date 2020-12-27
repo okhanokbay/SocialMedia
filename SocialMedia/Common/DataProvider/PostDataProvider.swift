@@ -18,31 +18,20 @@ protocol PostDataProviderInterface: AnyObject {
 
 final class PostDataProvider {
     private let apiLayer: APILayerInterface
-    private let apiResponseHandler: APIResponseHandlerInterface
     private let apiErrorHandler: APIErrorHandlerInterface
     
-    private let persistenceCreateLayer: PersistenceCreateLayerInterface
-    private let persistenceReadLayer: PersistenceReadLayerInterface
-    private let persistenceUpdateLayer: PersistenceUpdateLayerInterface
-    
+    private let persistenceLayer: PersistenceLayerInterface
     private let dataStore: PostDataStoreProtocol
     
     init(apiLayer: APILayerInterface,
-         apiResponseHandler: APIResponseHandlerInterface,
          apiErrorHandler: APIErrorHandlerInterface,
-         persistenceCreateLayer: PersistenceCreateLayerInterface,
-         persistenceReadLayer: PersistenceReadLayerInterface,
-         persistenceUpdateLayer: PersistenceUpdateLayerInterface,
+         persistenceLayer: PersistenceLayerInterface,
          dataStore: PostDataStoreProtocol) {
         
         self.apiLayer = apiLayer
-        self.apiResponseHandler = apiResponseHandler
         self.apiErrorHandler = apiErrorHandler
         
-        self.persistenceCreateLayer = persistenceCreateLayer
-        self.persistenceReadLayer = persistenceReadLayer
-        self.persistenceUpdateLayer = persistenceUpdateLayer
-        
+        self.persistenceLayer = persistenceLayer
         self.dataStore = dataStore
     }
 }
@@ -53,7 +42,7 @@ extension PostDataProvider: PostDataProviderInterface {}
 
 extension PostDataProvider {
     func fetchPosts(completion: @escaping PostDataProviderCompletion<PostViewModelProtocol>) {
-        persistenceReadLayer.fetchPosts { [weak self] localPosts in
+        persistenceLayer.fetchPosts { [weak self] localPosts in
             guard let self = self else { return }
             
             if localPosts.count == 0 {

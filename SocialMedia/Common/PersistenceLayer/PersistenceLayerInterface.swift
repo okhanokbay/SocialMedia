@@ -7,6 +7,8 @@
 
 import Foundation
 
+typealias PersistenceLayerInterface = (PersistenceCreateLayerInterface & PersistenceReadLayerInterface & PersistenceUpdateLayerInterface)
+
 // Persistence Layer segregated into CRUD protocols (no deletion in this project, so there is no D of the CRUD)
 
 protocol PersistenceCreateLayerInterface: AnyObject {
