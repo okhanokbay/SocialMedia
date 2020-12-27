@@ -34,6 +34,10 @@ final class PostDataProvider {
         self.persistenceLayer = persistenceLayer
         self.dataStore = dataStore
     }
+    
+    var currentPosts: [PostViewModelProtocol] {
+        return dataStore.postViewModels
+    }
 }
 
 // MARK: - Interface Methods -
@@ -59,7 +63,16 @@ extension PostDataProvider {
         let taskGroup = DispatchGroup()
         
         taskGroup.enter()
-        apiLayer.fetchUsers { [weak self] result in
+        apiLayer.fetchUsers(completion: fetchUsersCompletionHandler(taskGroup: taskGroup))
+        
+        taskGroup.enter()
+        apiLayer.fetchPosts(completion: fetchPostsCompletionHandler(taskGroup: taskGroup))
+        
+        taskGroup.notify(queue: .main, execute: taskGroupCompletionHandler(completion: completion))
+    }
+    
+    private func fetchUsersCompletionHandler(taskGroup: DispatchGroup) -> (ResponseHandler<[UserAPIResponse]>) {
+        return { [weak self] result in
             guard let self = self else { return }
             
             switch result {
@@ -72,9 +85,10 @@ extension PostDataProvider {
             
             taskGroup.leave()
         }
-        
-        taskGroup.enter()
-        apiLayer.fetchPosts { [weak self] result in
+    }
+    
+    private func fetchPostsCompletionHandler(taskGroup: DispatchGroup) -> (ResponseHandler<[PostAPIResponse]>) {
+        return { [weak self] result in
             guard let self = self else { return }
             
             switch result {
@@ -87,8 +101,11 @@ extension PostDataProvider {
             
             taskGroup.leave()
         }
-        
-        taskGroup.notify(queue: .main) { // No need to weakify the self here since the taskGroup is not owned by the self
+    }
+    
+    private func taskGroupCompletionHandler(completion: @escaping PostDataProviderCompletion<PostViewModelProtocol>) -> () -> Void {
+        return { [weak self] in
+            guard let self = self else { return }
             
             // Create a userDict to get related user object with postID in O(1) complexity
             let userDict: [Int: UserAPIResponse] = self.dataStore.users.reduce(into: [:]) { (result, response) in
@@ -106,10 +123,6 @@ extension PostDataProvider {
             self.dataStore.postViewModels = postViewModels
             completion(postViewModels)
         }
-    }
-    
-    var currentPosts: [PostViewModelProtocol] {
-        return dataStore.postViewModels
     }
 }
 
