@@ -16,13 +16,19 @@ final class PostsPresenter {
 
     private unowned let view: PostsViewInterface
     private let interactor: PostsInteractorInterface
+    private let dataStore: PostDataStoreProtocol
     private let wireframe: PostsWireframeInterface
-
+    
     // MARK: - Lifecycle -
 
-    init(view: PostsViewInterface, interactor: PostsInteractorInterface, wireframe: PostsWireframeInterface) {
+    init(view: PostsViewInterface,
+         interactor: PostsInteractorInterface,
+         dataStore: PostDataStoreProtocol,
+         wireframe: PostsWireframeInterface) {
+        
         self.view = view
         self.interactor = interactor
+        self.dataStore = dataStore
         self.wireframe = wireframe
     }
 }
@@ -31,8 +37,17 @@ final class PostsPresenter {
 
 extension PostsPresenter: PostsPresenterInterface {
     func viewDidLoad() {
-        interactor.getPosts { posts in
-            print(posts)
+        interactor.getPosts { [weak self] _ in
+            self?.view.reloadInterface()
         }
+    }
+    
+    func numberOfItems() -> Int {
+        return dataStore.postViewModels.count
+    }
+    
+    func item(at index: Int) -> PostTableCellViewModelProtocol {
+        let post = dataStore.postViewModels[index]
+        return PostTableCellViewModel(title: post.title)
     }
 }

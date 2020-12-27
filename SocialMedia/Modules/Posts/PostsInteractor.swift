@@ -11,9 +11,9 @@
 import Foundation
 
 final class PostsInteractor {
-    private let dataProvider: DataProviderInterface
+    private let dataProvider: PostDataProviderInterface
     
-    init(dataProvider: DataProviderInterface) {
+    init(dataProvider: PostDataProviderInterface) {
         self.dataProvider = dataProvider
     }
 }

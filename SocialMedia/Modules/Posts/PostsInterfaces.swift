@@ -14,11 +14,18 @@ protocol PostsWireframeInterface: WireframeInterface {
 }
 
 protocol PostsViewInterface: ViewInterface {
+    func reloadInterface()
 }
 
 protocol PostsPresenterInterface: PresenterInterface {
+    func numberOfItems() -> Int
+    func item(at index: Int) -> PostTableCellViewModelProtocol
 }
 
 protocol PostsInteractorInterface: InteractorInterface {
     func getPosts(completion: @escaping ([PostViewModelProtocol]) -> Void)
+}
+
+protocol PostTableCellViewModelProtocol {
+    var title: String { get }
 }

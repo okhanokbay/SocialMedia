@@ -53,9 +53,9 @@ extension CoreDataStack {
     }
 }
 
-// MARK: - Core Data Helper Methods -
+// MARK: - Core Data Output Methods -
 
-extension CoreDataStack: PersistenceLayerInterface {
+extension CoreDataStack: PersistenceLayerOutputInterface {
     func fetchPosts(completion: @escaping ([PostViewModelProtocol]) -> Void) {
         let request = Post.createFetchRequest()
         persistentContainer.performBackgroundTask { [weak self] backgroundContext in
@@ -64,6 +64,21 @@ extension CoreDataStack: PersistenceLayerInterface {
         }
     }
     
+    func fetchComments(for postID: Int, completion: (([CommentViewModelProtocol]) -> Void)? = nil) {
+        let request = Comment.createFetchRequest()
+        let predicate = NSPredicate(format: "postID = %@", postID)
+        request.predicate = predicate
+        
+        persistentContainer.performBackgroundTask { backgroundContext in
+            let managedObjects = try? backgroundContext.fetch(request)
+            completion?(managedObjects ?? [])
+        }
+    }
+}
+
+// MARK: - Core Data Input Methods -
+
+extension CoreDataStack: PersistenceLayerInputInterface {
     func save(posts: [PostViewModelProtocol],
               completion: ((_ isSuccess: Bool) -> Void)? = nil) {
         
@@ -98,17 +113,6 @@ extension CoreDataStack: PersistenceLayerInterface {
             } else {
                 completion?(false)
             }
-        }
-    }
-    
-    func fetchComments(for postID: Int, completion: (([CommentViewModelProtocol]) -> Void)? = nil) {
-        let request = Comment.createFetchRequest()
-        let predicate = NSPredicate(format: "postID = %@", postID)
-        request.predicate = predicate
-        
-        persistentContainer.performBackgroundTask { backgroundContext in
-            let managedObjects = try? backgroundContext.fetch(request)
-            completion?(managedObjects ?? [])
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  DataStore.swift
+//  PostDataStore.swift
 //  SocialMedia
 //
 //  Created by Okhan Okbay on 27.12.2020.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol DataStoreProtocol: AnyObject {
+protocol PostDataStoreProtocol: AnyObject {
     var posts: [PostAPIResponse] { get set }
     var comments: [CommentAPIResponse] { get set }
     var users: [UserAPIResponse] { get set }
@@ -15,7 +15,7 @@ protocol DataStoreProtocol: AnyObject {
     var postViewModels: [PostViewModelProtocol] { get set }
 }
 
-final class DataStore: DataStoreProtocol {
+final class PostDataStore: PostDataStoreProtocol {
     var posts: [PostAPIResponse] = []
     var comments: [CommentAPIResponse] = []
     var users: [UserAPIResponse] = []

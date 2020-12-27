@@ -1,5 +1,5 @@
 //
-//  DataProvider.swift
+//  PostDataProvider.swift
 //  SocialMedia
 //
 //  Created by Okhan Okbay on 26.12.2020.
@@ -7,43 +7,48 @@
 
 import Foundation
 
-typealias DataProviderCompletion<T> = ([T]) -> Void
+typealias PostDataProviderCompletion<T> = ([T]) -> Void
 
-protocol DataProviderInterface: AnyObject {
-    func getPosts(completion: @escaping DataProviderCompletion<PostViewModelProtocol>)
-    func getComments(for postID: Int, completion: @escaping DataProviderCompletion<CommentViewModelProtocol>)
+protocol PostDataProviderInterface: AnyObject {
+    func getPosts(completion: @escaping PostDataProviderCompletion<PostViewModelProtocol>)
+    func getComments(for postID: Int, completion: @escaping PostDataProviderCompletion<CommentViewModelProtocol>)
 }
 
-final class DataProvider {
+final class PostDataProvider {
     private let apiLayer: APILayerInterface
     private let apiResponseHandler: APIResponseHandlerInterface
     private let apiErrorHandler: APIErrorHandlerInterface
     
-    private let persistenceLayer: PersistenceLayerInterface
-    private let dataStore: DataStoreProtocol
+    private let persistenceLayerOutput: PersistenceLayerOutputInterface
+    private let persistenceLayerInput: PersistenceLayerInputInterface
+    
+    private let dataStore: PostDataStoreProtocol
     
     init(apiLayer: APILayerInterface,
          apiResponseHandler: APIResponseHandlerInterface,
          apiErrorHandler: APIErrorHandlerInterface,
-         persistenceLayer: PersistenceLayerInterface,
-         dataStore: DataStoreProtocol) {
+         persistenceLayerOutput: PersistenceLayerOutputInterface,
+         persistenceLayerInput: PersistenceLayerInputInterface,
+         dataStore: PostDataStoreProtocol) {
         
         self.apiLayer = apiLayer
         self.apiResponseHandler = apiResponseHandler
         self.apiErrorHandler = apiErrorHandler
         
-        self.persistenceLayer = persistenceLayer
+        self.persistenceLayerOutput = persistenceLayerOutput
+        self.persistenceLayerInput = persistenceLayerInput
+        
         self.dataStore = dataStore
     }
 }
 
 // MARK: - Interface Methods -
 
-extension DataProvider: DataProviderInterface {}
+extension PostDataProvider: PostDataProviderInterface {}
 
-extension DataProvider {
-    func getPosts(completion: @escaping DataProviderCompletion<PostViewModelProtocol>) {
-        persistenceLayer.fetchPosts { [weak self] localPosts in
+extension PostDataProvider {
+    func getPosts(completion: @escaping PostDataProviderCompletion<PostViewModelProtocol>) {
+        persistenceLayerOutput.fetchPosts { [weak self] localPosts in
             guard let self = self else { return }
             
             if localPosts.count == 0 {
@@ -56,7 +61,7 @@ extension DataProvider {
         }
     }
     
-    private func fetchPostsFromAPI(completion: @escaping DataProviderCompletion<PostViewModelProtocol>) {
+    private func fetchPostsFromAPI(completion: @escaping PostDataProviderCompletion<PostViewModelProtocol>) {
         let taskGroup = DispatchGroup()
         
         taskGroup.enter()
@@ -96,20 +101,22 @@ extension DataProvider {
                 result[response.userID] = response
             }
             
-            let posts: [PostViewModelProtocol] = self.dataStore.posts.compactMap { post in
+            let postViewModels: [PostViewModelProtocol] = self.dataStore.posts.compactMap { post in
                 guard let user = userDict[post.userID] else {
                     return nil
                 }
                 
                 return PostViewModel(with: post, user: UserViewModel(with: user), comments: [])
             }
-            completion(posts)
+            
+            self.dataStore.postViewModels = postViewModels
+            completion(postViewModels)
         }
     }
 }
 
-extension DataProvider {
-    func getComments(for postID: Int, completion: @escaping DataProviderCompletion<CommentViewModelProtocol>) {
+extension PostDataProvider {
+    func getComments(for postID: Int, completion: @escaping PostDataProviderCompletion<CommentViewModelProtocol>) {
         #warning("TODO")
     }
 }
