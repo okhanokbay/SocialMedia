@@ -46,41 +46,42 @@ final class MultiPurposeTableViewCell: UITableViewCell {
     @IBOutlet private weak var leftImageView: UIImageView!
     @IBOutlet private weak var textContainerView: UIView!
     @IBOutlet private weak var textStackView: UIStackView!
-    
+
     @IBOutlet private weak var firstLabel: UILabel!
     @IBOutlet private weak var secondLabel: UILabel!
     @IBOutlet private weak var thirdLabel: UILabel!
-    
+
     @IBOutlet private weak var rightContainerView: UIView!
     @IBOutlet private weak var rightImageView: UIImageView!
-    
+
     private var viewModel: MultiPurposeTableCellViewModelable!
-    
+
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
-        
+
         if viewModel.canBeSelected {
             setBackgroundColor(for: highlighted)
         }
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
+
         if viewModel.canBeSelected {
             setBackgroundColor(for: selected)
         }
     }
-    
+
     private func setBackgroundColor(for activeStatus: Bool) {
-        contentView.backgroundColor = activeStatus ? .systemYellow : (viewModel.isInHeader ? .systemGray5 : .systemGray6)
+        let inactiveColor: UIColor = (viewModel.isInHeader ? .systemGray5 : .systemGray6)
+        contentView.backgroundColor = activeStatus ? .systemYellow : inactiveColor
     }
-    
+
     func configure(with viewModel: MultiPurposeTableCellViewModelable) {
         self.viewModel = viewModel
-        
+
         setBackgroundColor(for: false)
-        
+
         setupLeftImage(with: viewModel)
         setupLabels(with: viewModel)
         setupRightView(with: viewModel)
@@ -94,33 +95,33 @@ extension MultiPurposeTableViewCell {
         if let leftImage = viewModel.leftImage {
             leftImageView.image = leftImage
             imageContainerView.isHidden = false
-            
+
         } else {
             imageContainerView.isHidden = true
         }
     }
-    
+
     private func setupLabels(with viewModel: MultiPurposeTableCellViewModelable) {
         firstLabel.text = viewModel.firstText
-        
+
         secondLabel.text = viewModel.secondText
         secondLabel.isHidden = viewModel.secondText == nil
-        
+
         thirdLabel.text = viewModel.thirdText
         thirdLabel.isHidden = viewModel.thirdText == nil
     }
-    
+
     private func setupRightView(with viewModel: MultiPurposeTableCellViewModelable) {
         if let indicatorType = viewModel.disclosureIndicatorType {
-            
+
             switch indicatorType {
             case .normal:
                 rightImageView.image = ImageFactory.disclosureIndicator.image
-            
+
             case .arrow:
                 rightImageView.image = ImageFactory.rightArrow.image
             }
-            
+
             rightContainerView.isHidden = false
         } else {
             rightContainerView.isHidden = true

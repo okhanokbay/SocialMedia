@@ -11,24 +11,24 @@
 import Foundation
 
 final class PostDetailPresenter {
-    
+
     // MARK: - Private properties -
-    
+
     private unowned let view: PostDetailViewInterface
     private let interactor: PostDetailInteractorInputInterface
     private let router: PostDetailRouterInterface
     private let post: PostViewModelProtocol
-    
+
     private var headerViewModels: [MultiPurposeTableCellViewModelable] = []
     private var cellViewModels: [[MultiPurposeTableCellViewModelable]] = []
-    
+
     // MARK: - Lifecycle -
-    
+
     init(view: PostDetailViewInterface,
          interactor: PostDetailInteractorInputInterface,
          router: PostDetailRouterInterface,
          post: PostViewModelProtocol) {
-        
+
         self.view = view
         self.interactor = interactor
         self.router = router
@@ -44,24 +44,24 @@ extension PostDetailPresenter: PostDetailPresenterInterface {
             self.view.setTitle(Strings.Post.detailTitle.rawValue)
             self.view.showProgressHUD()
         }
-        
+
         setupInitialCellViewModels()
-        
+
         interactor.getComments(for: post)
     }
-    
+
     func numberOfSections() -> Int {
         return cellViewModels.count
     }
-    
+
     func numberOfItems(in section: Int) -> Int {
         return cellViewModels[section].count
     }
-    
+
     func item(at section: Int, row: Int) -> MultiPurposeTableCellViewModelable {
         return cellViewModels[section][row]
     }
-    
+
     func itemForHeader(at section: Int) -> MultiPurposeTableCellViewModelable {
         return headerViewModels[section]
     }
@@ -73,13 +73,13 @@ extension PostDetailPresenter: PostDetailInteractorOutputInterface {
     func commentsReceived(comments: [CommentViewModelProtocol]) {
         makeHeader(from: comments)
         makeCells(from: comments)
-        
+
         DispatchQueue.main.async {
             self.view.hideProgressHUD()
             self.view.reloadInterface()
         }
     }
-    
+
     private func makeHeader(from comments: [CommentViewModelProtocol]) {
         let commentsTitle = "\(Strings.Post.commentsTitle.rawValue) (\(comments.count))"
         let commentsTitleCellViewModel = MultiPurposeTableCellViewModel(leftImage: ImageFactory.comment.image,
@@ -88,14 +88,14 @@ extension PostDetailPresenter: PostDetailInteractorOutputInterface {
                                                                         isInHeader: true)
         headerViewModels.append(commentsTitleCellViewModel)
     }
-    
+
     private func makeCells(from comments: [CommentViewModelProtocol]) {
         var viewModels: [MultiPurposeTableCellViewModelable] = []
-        
+
         if comments.count == 0 {
             let noCommentCellViewModel = MultiPurposeTableCellViewModel(firstText: Strings.Post.noComment.rawValue)
             viewModels.append(noCommentCellViewModel)
-            
+
         } else {
             let commentCellViewModels: [MultiPurposeTableCellViewModel] = comments.map { comment in
                 return .init(firstText: comment.body,
@@ -105,7 +105,7 @@ extension PostDetailPresenter: PostDetailInteractorOutputInterface {
             }
             viewModels.append(contentsOf: commentCellViewModels)
         }
-        
+
         cellViewModels.append(viewModels)
     }
 }
@@ -119,7 +119,7 @@ extension PostDetailPresenter {
                                                                      canBeSelected: false,
                                                                      isInHeader: true)
         headerViewModels.append(authorNameCellViewModel)
-        
+
         let postDescriptionCellViewModel = MultiPurposeTableCellViewModel(firstText: post.body,
                                                                           canBeSelected: false)
         cellViewModels.append([postDescriptionCellViewModel])

@@ -15,8 +15,13 @@ final class APIErrorHandler: APIErrorHandlerInterface {
     func handleError(_ error: APIError) {
         let alertViewModel = AlertViewModel(title: Strings.Alert.error.rawValue,
                                             message: error.customDescription,
-                                            buttonText: Strings.Alert.ok.rawValue)
-        
-        UIApplication.shared.windows.first { $0.isKeyWindow }?.rootViewController?.show(alertViewModel.alertController, sender: nil)
+                                            buttonText: Strings.Alert.okay.rawValue)
+
+        UIApplication
+            .shared
+            .windows
+            .first { $0.isKeyWindow }?
+            .rootViewController?
+            .show(alertViewModel.alertController, sender: nil)
     }
 }

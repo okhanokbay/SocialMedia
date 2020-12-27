@@ -11,7 +11,8 @@
 import UIKit
 
 protocol PostDetailWireframeInterface: WireframeInterface {
-    static func assembleWireframe(with dataProvider: PostDataProviderInterface, post: PostViewModelProtocol) -> PostDetailWireframe
+    static func assembleWireframe(with dataProvider: PostDataProviderInterface,
+                                  post: PostViewModelProtocol) -> PostDetailWireframe
 }
 
 protocol PostDetailRouterInterface: RouterInterface {
@@ -27,7 +28,7 @@ protocol PostDetailPresenterInterface: PresenterInterface {
     func numberOfSections() -> Int
     func numberOfItems(in section: Int) -> Int
     func item(at section: Int, row: Int) -> MultiPurposeTableCellViewModelable
-    
+
     func itemForHeader(at section: Int) -> MultiPurposeTableCellViewModelable
 }
 
@@ -38,4 +39,3 @@ protocol PostDetailInteractorInputInterface: InteractorInterface {
 protocol PostDetailInteractorOutputInterface: InteractorInterface {
     func commentsReceived(comments: [CommentViewModelProtocol])
 }
-

@@ -12,7 +12,7 @@ enum ImageFactory: String {
     case rightArrow = "RightArrow"
     case profile = "Profile"
     case comment = "Comment"
-    
+
     var image: UIImage {
         return UIImage(named: rawValue)!
     }

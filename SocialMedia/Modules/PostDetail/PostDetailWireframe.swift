@@ -14,21 +14,23 @@ final class PostDetailWireframe: BaseWireframe {}
 
 extension PostDetailWireframe: PostDetailWireframeInterface {
     // MARK: - Module setup -
-    
-    static func assembleWireframe(with dataProvider: PostDataProviderInterface, post: PostViewModelProtocol) -> PostDetailWireframe {
+
+    static func assembleWireframe(with dataProvider: PostDataProviderInterface,
+                                  post: PostViewModelProtocol) -> PostDetailWireframe {
+
         let viewController = PostDetailViewController.loadFromNib()
         let wireframe = PostDetailWireframe(viewController: viewController)
-        
+
         let router = PostDetailRouter(viewController: viewController)
         let interactor = PostDetailInteractor(dataProvider: dataProvider)
         let presenter = PostDetailPresenter(view: viewController,
                                             interactor: interactor,
                                             router: router,
                                             post: post)
-        
+
         interactor.output = presenter
         viewController.presenter = presenter
-        
+
         return wireframe
     }
 }

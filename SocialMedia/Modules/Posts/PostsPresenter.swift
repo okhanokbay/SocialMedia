@@ -17,15 +17,15 @@ final class PostsPresenter {
     private unowned let view: PostsViewInterface
     private let interactor: PostsInteractorInputInterface
     private let router: PostsRouterInterface
-    
+
     private var cellViewModels: [MultiPurposeTableCellViewModel] = []
-    
+
     // MARK: - Lifecycle -
 
     init(view: PostsViewInterface,
          interactor: PostsInteractorInputInterface,
          router: PostsRouterInterface) {
-        
+
         self.view = view
         self.interactor = interactor
         self.router = router
@@ -40,22 +40,22 @@ extension PostsPresenter: PostsPresenterInterface {
             self.view.setTitle(Strings.Post.title.rawValue)
             self.view.showProgressHUD()
         }
-        
+
         interactor.getPosts()
     }
-    
+
     func numberOfItems() -> Int {
         return interactor.getNumberOfItems()
     }
-    
+
     func item(at index: Int) -> MultiPurposeTableCellViewModelable {
         return cellViewModels[index]
     }
-    
+
     func didSelectItem(at index: Int) {
         let dataProvider = interactor.getDataProvider()
         let post = interactor.getItem(at: index)
-        
+
         DispatchQueue.main.async {
             self.router.navigateToPostDetail(with: dataProvider, post: post)
         }
@@ -66,8 +66,9 @@ extension PostsPresenter: PostsPresenterInterface {
 
 extension PostsPresenter: PostsInteractorOutputInterface {
     func postsReceived(_ posts: [PostViewModelProtocol]) {
-        cellViewModels = posts.map { MultiPurposeTableCellViewModel(firstText: $0.title, disclosureIndicatorType: .normal) }
-        
+        cellViewModels = posts.map { MultiPurposeTableCellViewModel(firstText: $0.title,
+                                                                    disclosureIndicatorType: .normal) }
+
         DispatchQueue.main.async {
             self.view.hideProgressHUD()
             self.view.reloadInterface()

@@ -13,7 +13,7 @@ struct CommentAPIResponse: Decodable, Hashable {
     let name: String
     let email: String
     let body: String
-    
+
     enum CodingKeys: String, CodingKey {
         case postID = "postId"
         case commentID = "id"

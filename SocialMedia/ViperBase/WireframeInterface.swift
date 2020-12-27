@@ -15,7 +15,7 @@ protocol WireframeInterface: AnyObject {
 class BaseWireframe {
     private unowned var innerViewController: UIViewController
 
-    //to retain view controller reference upon first access
+    // To retain view controller reference upon first access
     private var temporaryStoredViewController: UIViewController?
 
     init(viewController: UIViewController) {

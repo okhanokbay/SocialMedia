@@ -13,7 +13,7 @@ import Foundation
 final class PostDetailInteractor {
     private let dataProvider: PostDataProviderInterface
     weak var output: PostDetailInteractorOutputInterface!
-    
+
     init(dataProvider: PostDataProviderInterface) {
         self.dataProvider = dataProvider
     }

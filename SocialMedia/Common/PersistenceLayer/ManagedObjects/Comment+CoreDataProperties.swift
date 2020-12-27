@@ -13,7 +13,7 @@ extension Comment {
     @nonobjc public class func createFetchRequest() -> NSFetchRequest<Comment> {
         return NSFetchRequest<Comment>(entityName: "Comment")
     }
-    
+
     @NSManaged public var body: String
     @NSManaged public var commentID: Int
     @NSManaged public var email: String
@@ -25,15 +25,15 @@ extension Comment {
 extension Comment: CommentViewModelProtocol {
     static func makeSelf(from comment: CommentViewModelProtocol,
                          context: NSManagedObjectContext) -> Comment {
-        
+
         let managedComment = Comment(context: context)
-        
+
         managedComment.postID = comment.postID
         managedComment.commentID = comment.commentID
         managedComment.name = comment.name
         managedComment.email = comment.email
         managedComment.body = comment.body
-        
+
         return managedComment
     }
 }

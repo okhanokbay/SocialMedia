@@ -12,11 +12,11 @@ extension AlertViewModel {
         let alertController = UIAlertController(title: title,
                                                 message: message,
                                                 preferredStyle: .alert)
-        
+
         let confirmAction = UIAlertAction(title: buttonText,
                                           style: .default,
                                           handler: nil)
-        
+
         alertController.addAction(confirmAction)
         return alertController
     }

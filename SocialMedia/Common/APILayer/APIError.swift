@@ -10,7 +10,7 @@ import Foundation
 enum APIError: Error {
   case decodingError(customDescription: String)
   case serverError(customDescription: String)
-  
+
   var customDescription: String {
     switch self {
     case .decodingError(let customDescription), .serverError(let customDescription):

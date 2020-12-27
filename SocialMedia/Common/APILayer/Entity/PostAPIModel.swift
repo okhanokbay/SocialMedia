@@ -12,7 +12,7 @@ struct PostAPIResponse: Decodable {
     let postID: Int
     let title: String
     let body: String
-    
+
     enum CodingKeys: String, CodingKey {
         case userID = "userId"
         case postID = "id"

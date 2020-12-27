@@ -17,7 +17,7 @@ struct UserViewModel: UserViewModelProtocol {
     let userID: Int
     let name: String
     let username: String
-    
+
     init(with userAPIResponse: UserAPIResponse) {
         userID = userAPIResponse.userID
         name = userAPIResponse.name

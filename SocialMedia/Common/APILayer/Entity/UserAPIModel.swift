@@ -11,7 +11,7 @@ struct UserAPIResponse: Decodable {
     let userID: Int
     let name: String
     let username: String
-    
+
     enum CodingKeys: String, CodingKey {
         case userID = "id"
         case name

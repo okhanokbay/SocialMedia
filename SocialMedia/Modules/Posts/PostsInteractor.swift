@@ -13,7 +13,7 @@ import Foundation
 final class PostsInteractor {
     private let dataProvider: PostDataProviderInterface
     weak var output: PostsInteractorOutputInterface!
-    
+
     init(dataProvider: PostDataProviderInterface) {
         self.dataProvider = dataProvider
     }
@@ -29,15 +29,15 @@ extension PostsInteractor: PostsInteractorInputInterface {
             })
         }
     }
-    
+
     func getNumberOfItems() -> Int {
         return dataProvider.currentPosts.count
     }
-    
+
     func getItem(at index: Int) -> PostViewModelProtocol {
         return dataProvider.currentPosts[index]
     }
-    
+
     func getDataProvider() -> PostDataProviderInterface {
         return dataProvider
     }

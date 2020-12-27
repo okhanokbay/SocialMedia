@@ -17,7 +17,7 @@ protocol RouterInterface: AnyObject {
 
 class BaseRouter: RouterInterface {
     private weak var viewController: UIViewController?
-    
+
     init(viewController: UIViewController) {
         self.viewController = viewController
     }
@@ -39,12 +39,18 @@ extension BaseRouter {
     }
 
     func showErrorAlert(with message: String) {
-        let alertViewModel = AlertViewModel(title: Strings.Alert.error.rawValue, message: message, buttonText: Strings.Alert.ok.rawValue)
+        let alertViewModel = AlertViewModel(title: Strings.Alert.error.rawValue,
+                                            message: message,
+                                            buttonText: Strings.Alert.okay.rawValue)
+
         navigationController?.present(alertViewModel.alertController, animated: true, completion: nil)
     }
 
     func showAlert(with title: String, message: String) {
-        let alertViewModel = AlertViewModel(title: title, message: message, buttonText: Strings.Alert.ok.rawValue)
+        let alertViewModel = AlertViewModel(title: title,
+                                            message: message,
+                                            buttonText: Strings.Alert.okay.rawValue)
+
         navigationController?.present(alertViewModel.alertController, animated: true, completion: nil)
     }
 }

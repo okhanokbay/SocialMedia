@@ -44,22 +44,22 @@ extension Post: PostViewModelProtocol {
     var comments: [CommentViewModelProtocol] {
         return Array(postComments)
     }
-    
+
     @discardableResult
     static func makeSelf(from post: PostViewModelProtocol, context: NSManagedObjectContext) -> Post {
         let managedPost = Post(context: context)
-        
+
         managedPost.postID = post.postID
         managedPost.userID = post.userID
         managedPost.title = post.title
         managedPost.body = post.body
         managedPost.name = post.name
         managedPost.username = post.username
-        
+
         managedPost.postComments = Set(post.comments.map { comment in
             return Comment.makeSelf(from: comment, context: context)
         })
-        
+
         return managedPost
     }
 }

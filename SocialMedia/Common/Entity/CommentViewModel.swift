@@ -21,7 +21,7 @@ struct CommentViewModel: CommentViewModelProtocol {
     let name: String
     let email: String
     let body: String
-    
+
     init(commentAPIResponse: CommentAPIResponse) {
         self.init(postID: commentAPIResponse.postID,
                   commentID: commentAPIResponse.commentID,
@@ -29,7 +29,7 @@ struct CommentViewModel: CommentViewModelProtocol {
                   email: commentAPIResponse.email,
                   body: commentAPIResponse.body)
     }
-    
+
     init(postID: Int, commentID: Int, name: String, email: String, body: String) {
         self.postID = postID
         self.commentID = commentID

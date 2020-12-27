@@ -12,23 +12,23 @@ import UIKit
 
 final class PostsViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
-    
+
     // MARK: - Public properties -
-    
+
     var presenter: PostsPresenterInterface!
-    
+
     // MARK: - Lifecycle -
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupTableView()
         presenter.viewDidLoad()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         if let selectedRow = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: selectedRow, animated: true)
         }
@@ -41,11 +41,11 @@ extension PostsViewController: PostsViewInterface {
     func showProgressHUD() {
         showProgressHUD(on: view)
     }
-    
+
     func setTitle(_ title: String) {
         self.title = title
     }
-    
+
     func reloadInterface() {
         tableView.reloadData()
     }
@@ -56,11 +56,12 @@ extension PostsViewController: PostsViewInterface {
 extension PostsViewController {
     func setupTableView() {
         tableView.tableFooterView = UIView()
-        
+
         tableView.dataSource = self
         tableView.delegate = self
-        
-        tableView.register(MultiPurposeTableViewCell.nib, forCellReuseIdentifier: MultiPurposeTableViewCell.reuseIdentifier)
+
+        tableView.register(MultiPurposeTableViewCell.nib,
+                           forCellReuseIdentifier: MultiPurposeTableViewCell.reuseIdentifier)
     }
 }
 
@@ -68,13 +69,15 @@ extension PostsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         presenter.numberOfItems()
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = presenter.item(at: indexPath.row)
-        
-        // Force casted depending on this convo here: https://stackoverflow.com/questions/44168134/how-to-correct-avoid-this-force-cast
-        let cell = tableView.dequeueReusableCell(withIdentifier: MultiPurposeTableViewCell.reuseIdentifier,
-                                                 for: indexPath) as! MultiPurposeTableViewCell
+
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MultiPurposeTableViewCell.reuseIdentifier,
+                                                       for: indexPath) as? MultiPurposeTableViewCell else {
+            fatalError("Cell could not be created \(#file) \(#line)")
+        }
+
         cell.configure(with: viewModel)
         return cell
     }
@@ -84,7 +87,7 @@ extension PostsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.didSelectItem(at: indexPath.row)
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }

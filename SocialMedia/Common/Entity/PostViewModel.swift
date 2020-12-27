@@ -25,19 +25,19 @@ struct PostViewModel: PostViewModelProtocol {
     let name: String
     let username: String
     let comments: [CommentViewModelProtocol]
-    
+
     init(with postAPIResponse: PostAPIResponse,
-        user: UserViewModelProtocol,
-        comments: [CommentViewModelProtocol]) {
-        
+         user: UserViewModelProtocol,
+         comments: [CommentViewModelProtocol]) {
+
         userID = postAPIResponse.userID
         postID = postAPIResponse.postID
         title = postAPIResponse.title
         body = postAPIResponse.body
-        
+
         name = user.name
         username = user.username
-        
+
         self.comments = comments
     }
 }

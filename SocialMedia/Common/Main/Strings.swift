@@ -10,13 +10,13 @@ import Foundation
 struct Strings {
     enum Alert: String {
         case error = "Error"
-        case ok = "OK"
+        case okay = "OK"
     }
-    
+
     enum Post: String {
         case title = "Posts"
         case detailTitle = "Post Detail"
-        
+
         case noComment = "No comments found for this post..."
         case commentsTitle = "Comments"
     }

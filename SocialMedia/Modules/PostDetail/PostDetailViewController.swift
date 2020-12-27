@@ -13,7 +13,7 @@ import UIKit
 final class PostDetailViewController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView!
-    
+
     // MARK: - Public properties -
 
     var presenter: PostDetailPresenterInterface!
@@ -23,7 +23,7 @@ final class PostDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupTableView()
         presenter.viewDidLoad()
     }
@@ -35,11 +35,11 @@ extension PostDetailViewController: PostDetailViewInterface {
     func showProgressHUD() {
         showProgressHUD(on: view)
     }
-    
+
     func setTitle(_ title: String) {
         self.title = title
     }
-    
+
     func reloadInterface() {
         tableView.reloadData()
     }
@@ -50,11 +50,12 @@ extension PostDetailViewController: PostDetailViewInterface {
 extension PostDetailViewController {
     func setupTableView() {
         tableView.tableFooterView = UIView()
-        
+
         tableView.dataSource = self
         tableView.delegate = self
-        
-        tableView.register(MultiPurposeTableViewCell.nib, forCellReuseIdentifier: MultiPurposeTableViewCell.reuseIdentifier)
+
+        tableView.register(MultiPurposeTableViewCell.nib,
+                           forCellReuseIdentifier: MultiPurposeTableViewCell.reuseIdentifier)
     }
 }
 
@@ -62,26 +63,31 @@ extension PostDetailViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         presenter.numberOfSections()
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         presenter.numberOfItems(in: section)
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let viewModel = presenter.item(at: indexPath.section, row: indexPath.row)
-        
-        // Force casted depending on this convo here: https://stackoverflow.com/questions/44168134/how-to-correct-avoid-this-force-cast
-        let cell = tableView.dequeueReusableCell(withIdentifier: MultiPurposeTableViewCell.reuseIdentifier,
-                                                 for: indexPath) as! MultiPurposeTableViewCell
+
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MultiPurposeTableViewCell.reuseIdentifier,
+                                                       for: indexPath) as? MultiPurposeTableViewCell else {
+            fatalError("Cell could not be created \(#file) \(#line)")
+        }
+
         cell.configure(with: viewModel)
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let viewModel = presenter.itemForHeader(at: section)
-        
-        // Force casted depending on this convo here: https://stackoverflow.com/questions/44168134/how-to-correct-avoid-this-force-cast
-        let cell = tableView.dequeueReusableCell(withIdentifier: MultiPurposeTableViewCell.reuseIdentifier) as! MultiPurposeTableViewCell
+
+        guard let cell = tableView.dequeueReusableCell(withIdentifier:
+                                        MultiPurposeTableViewCell.reuseIdentifier) as? MultiPurposeTableViewCell else {
+            fatalError("Cell could not be created \(#file) \(#line)")
+        }
+
         cell.configure(with: viewModel)
         return cell.contentView
     }
@@ -91,11 +97,11 @@ extension PostDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
+
     func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         return estimatedSectionHeaderHeight
     }

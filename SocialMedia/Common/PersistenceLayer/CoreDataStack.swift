@@ -12,7 +12,7 @@ import CoreData
 
 final class CoreDataStack {
     static let shared: CoreDataStack = .init()
-    
+
     lazy var persistentContainer: NSPersistentContainer = {
         let container: NSPersistentContainer = .init(name: "SocialMedia")
         container.loadPersistentStores(completionHandler: { (_, error) in
@@ -22,14 +22,14 @@ final class CoreDataStack {
         })
         return container
     }()
-    
+
     init() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(sceneDidEnterBackground),
                                                name: NotificationNameWrapper.sceneDidEnterBackground,
                                                object: nil)
     }
-    
+
     @objc func sceneDidEnterBackground() {
         CoreDataStack.shared.save(context: persistentContainer.viewContext)
     }
@@ -47,7 +47,7 @@ extension CoreDataStack {
             }
         }
     }
-    
+
     private func handleError(_ error: Error) {
         fatalError("Unresolved error: \(error.localizedDescription)")
     }
@@ -58,14 +58,14 @@ extension CoreDataStack {
 extension CoreDataStack: PersistenceCreateLayerInterface {
     func save(posts: [PostViewModelProtocol],
               completion: ((_ isSuccess: Bool) -> Void)? = nil) {
-        
+
         persistentContainer.performBackgroundTask { [weak self] backgroundContext in
             guard let self = self else { return }
-            
+
             posts.forEach { post in
                 Post.makeSelf(from: post, context: backgroundContext)
             }
-            
+
             self.save(context: backgroundContext)
         }
     }
@@ -77,19 +77,18 @@ extension CoreDataStack: PersistenceReadLayerInterface {
     func fetchPosts(completion: @escaping ([PostViewModelProtocol]) -> Void) {
         let request = Post.createFetchRequest()
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Post.postID, ascending: true)]
-        
-        persistentContainer.performBackgroundTask { [weak self] backgroundContext in
-            guard let self = self else { return }
-            completion((try? self.persistentContainer.viewContext.fetch(request)) ?? [])
+
+        persistentContainer.performBackgroundTask { backgroundContext in
+            completion((try? backgroundContext.fetch(request)) ?? [])
         }
     }
-    
+
     func fetchComments(for post: PostViewModelProtocol, completion: (([CommentViewModelProtocol]) -> Void)? = nil) {
         let request = Comment.createFetchRequest()
         let predicate = NSPredicate(format: "postID = %d", post.postID)
         request.predicate = predicate
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Comment.commentID, ascending: true)]
-        
+
         persistentContainer.performBackgroundTask { backgroundContext in
             let managedComments = try? backgroundContext.fetch(request)
             completion?(managedComments ?? [])
@@ -103,19 +102,19 @@ extension CoreDataStack: PersistenceUpdateLayerInterface {
     func update(post: PostViewModelProtocol,
                 with comments: [CommentViewModelProtocol],
                 completion: ((_ isSuccess: Bool) -> Void)? = nil) {
-        
+
         let request = Post.createFetchRequest()
         let predicate = NSPredicate(format: "postID = %d", post.postID)
         request.predicate = predicate
-        
+
         persistentContainer.performBackgroundTask { backgroundContext in
             if let managedPost = try? backgroundContext.fetch(request).first {
                 let newComments = Set(comments.map { Comment.makeSelf(from: $0, context: backgroundContext) })
                 managedPost.postComments = newComments
-                
+
                 completion?(true)
                 self.save(context: backgroundContext)
-                
+
             } else {
                 completion?(false)
             }

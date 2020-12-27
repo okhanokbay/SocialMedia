@@ -7,7 +7,9 @@
 
 import Foundation
 
-typealias PersistenceLayerInterface = (PersistenceCreateLayerInterface & PersistenceReadLayerInterface & PersistenceUpdateLayerInterface)
+typealias PersistenceLayerInterface = (PersistenceCreateLayerInterface &
+                                       PersistenceReadLayerInterface &
+                                       PersistenceUpdateLayerInterface)
 
 // Persistence Layer segregated into CRUD protocols (no deletion in this project, so there is no D of the CRUD)
 
@@ -20,7 +22,7 @@ protocol PersistenceReadLayerInterface: AnyObject {
     func fetchPosts(completion: @escaping ([PostViewModelProtocol]) -> Void)
     func fetchComments(for post: PostViewModelProtocol, completion: (([CommentViewModelProtocol]) -> Void)?)
 }
-    
+
 protocol PersistenceUpdateLayerInterface: AnyObject {
     func update(post: PostViewModelProtocol,
                 with comments: [CommentViewModelProtocol],
