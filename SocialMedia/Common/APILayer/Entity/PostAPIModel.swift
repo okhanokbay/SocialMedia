@@ -16,7 +16,7 @@ struct PostAPIResponse: Decodable {
     enum CodingKeys: String, CodingKey {
         case userID = "userId"
         case postID = "id"
-        case title = "title"
-        case body = "body"
+        case title
+        case body
     }
 }

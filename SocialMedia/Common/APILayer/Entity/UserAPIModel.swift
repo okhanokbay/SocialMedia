@@ -14,7 +14,7 @@ struct UserAPIResponse: Decodable {
     
     enum CodingKeys: String, CodingKey {
         case userID = "id"
-        case name = "name"
-        case username = "username"
+        case name
+        case username
     }
 }

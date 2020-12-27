@@ -25,8 +25,8 @@ struct CommentAPIResponse: Decodable, Hashable {
     enum CodingKeys: String, CodingKey {
         case postID = "postId"
         case commentID = "id"
-        case name = "name"
-        case email = "email"
-        case body = "body"
+        case name
+        case email
+        case body
     }
 }
