@@ -25,7 +25,7 @@ protocol PostsInteractorInputInterface: InteractorInterface {
 }
 
 protocol PostsInteractorOutputInterface: InteractorInterface {
-    func postsReceived()
+    func postsReceived(_ posts: [PostViewModelProtocol])
 }
 
 protocol PostsPresenterInterface: PresenterInterface {

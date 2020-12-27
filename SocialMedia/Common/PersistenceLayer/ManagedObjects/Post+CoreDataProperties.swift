@@ -50,6 +50,7 @@ extension Post: PostViewModelProtocol {
         let managedPost = Post(context: context)
         
         managedPost.postID = post.postID
+        managedPost.userID = post.userID
         managedPost.title = post.title
         managedPost.body = post.body
         managedPost.name = post.name

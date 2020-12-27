@@ -76,6 +76,8 @@ extension CoreDataStack: PersistenceCreateLayerInterface {
 extension CoreDataStack: PersistenceReadLayerInterface {
     func fetchPosts(completion: @escaping ([PostViewModelProtocol]) -> Void) {
         let request = Post.createFetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Post.postID, ascending: true)]
+        
         persistentContainer.performBackgroundTask { [weak self] backgroundContext in
             guard let self = self else { return }
             completion((try? self.persistentContainer.viewContext.fetch(request)) ?? [])
@@ -83,13 +85,13 @@ extension CoreDataStack: PersistenceReadLayerInterface {
     }
     
     func fetchComments(for post: PostViewModelProtocol, completion: (([CommentViewModelProtocol]) -> Void)? = nil) {
-        let request = Comment.createFetchRequest()
+        let request = Post.createFetchRequest()
         let predicate = NSPredicate(format: "postID = %d", post.postID)
         request.predicate = predicate
         
         persistentContainer.performBackgroundTask { backgroundContext in
-            let managedObjects = try? backgroundContext.fetch(request)
-            completion?(managedObjects ?? [])
+            let managedPost = try? backgroundContext.fetch(request).first
+            completion?(Array(managedPost?.postComments ?? []))
         }
     }
 }
@@ -117,6 +119,8 @@ extension CoreDataStack: PersistenceUpdateLayerInterface {
             } else {
                 completion?(false)
             }
+            
+            self.save(context: backgroundContext)
         }
     }
 }

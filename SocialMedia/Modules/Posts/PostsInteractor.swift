@@ -19,12 +19,12 @@ final class PostsInteractor {
     }
 }
 
-// MARK: - Extensions -
+// MARK: - InputInterface -
 
 extension PostsInteractor: PostsInteractorInputInterface {
     func getPosts() {
-        dataProvider.fetchPosts(completion: { [weak self] _ in
-            self?.output.postsReceived()
+        dataProvider.fetchPosts(completion: { [weak self] posts in
+            self?.output.postsReceived(posts)
         })
     }
     

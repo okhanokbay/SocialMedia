@@ -13,7 +13,11 @@ struct Strings {
         case ok = "OK"
     }
     
-    enum PostsPage: String {
+    enum Post: String {
         case title = "Posts"
+        case detailTitle = "Post Detail"
+        
+        case noComment = "No comments found for this post..."
+        case commentsTitle = "Comments"
     }
 }

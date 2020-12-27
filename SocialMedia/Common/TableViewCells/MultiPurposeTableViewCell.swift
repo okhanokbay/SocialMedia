@@ -31,7 +31,7 @@ struct MultiPurposeTableCellViewModel: MultiPurposeTableCellViewModelable {
     let firstText: String
     var secondText: String?
     var thirdText: String?
-    let disclosureIndicatorType: DisclosureIndicatorType?
+    var disclosureIndicatorType: DisclosureIndicatorType?
 }
 
 final class MultiPurposeTableViewCell: UITableViewCell {
@@ -99,10 +99,10 @@ extension MultiPurposeTableViewCell {
             
             switch indicatorType {
             case .normal:
-                rightImageView.image = UIImage(named: ImageName.disclosureIndicator.rawValue)
+                rightImageView.image = ImageFactory.disclosureIndicator.image
             
             case .arrow:
-                rightImageView.image = UIImage(named: ImageName.rightArrow.rawValue)
+                rightImageView.image = ImageFactory.rightArrow.image
             }
             
             rightContainerView.isHidden = false

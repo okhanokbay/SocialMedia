@@ -23,14 +23,58 @@ final class PostDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupTableView()
         presenter.viewDidLoad()
     }
 }
 
-// MARK: - Extensions -
+// MARK: - PostDetailViewInterface -
 
 extension PostDetailViewController: PostDetailViewInterface {
+    func setTitle(_ title: String) {
+        self.title = title
+    }
+    
     func reloadInterface() {
+        tableView.reloadData()
+    }
+}
+
+// MARK: - TableView -
+
+extension PostDetailViewController {
+    func setupTableView() {
+        tableView.tableFooterView = UIView()
         
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        tableView.register(MultiPurposeTableViewCell.nib, forCellReuseIdentifier: MultiPurposeTableViewCell.reuseIdentifier)
+    }
+}
+
+extension PostDetailViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        presenter.numberOfSections()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        presenter.numberOfItems(in: section)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let viewModel = presenter.item(at: indexPath.section, row: indexPath.row)
+        
+        // Force casted depending on this convo here: https://stackoverflow.com/questions/44168134/how-to-correct-avoid-this-force-cast
+        let cell = tableView.dequeueReusableCell(withIdentifier: MultiPurposeTableViewCell.reuseIdentifier,
+                                                 for: indexPath) as! MultiPurposeTableViewCell
+        cell.configure(with: viewModel)
+        return cell
+    }
+}
+
+extension PostDetailViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }

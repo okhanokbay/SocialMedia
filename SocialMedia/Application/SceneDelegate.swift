@@ -17,6 +17,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let postsNavigationController = PostsNavigationController()
+        postsNavigationController.navigationBar.tintColor = .brown
+        postsNavigationController.navigationBar.prefersLargeTitles = true
+        
         let rootWireframe = PostsWireframe.assembleWireframe()
         postsNavigationController.setRootWireframe(rootWireframe)
         

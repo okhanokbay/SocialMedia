@@ -19,7 +19,7 @@ final class PostDetailInteractor {
     }
 }
 
-// MARK: - Extensions -
+// MARK: - InputInterface -
 
 extension PostDetailInteractor: PostDetailInteractorInputInterface {
     func getComments(for post: PostViewModelProtocol) {

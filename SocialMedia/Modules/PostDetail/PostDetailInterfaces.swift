@@ -19,10 +19,15 @@ protocol PostDetailRouterInterface: RouterInterface {
 }
 
 protocol PostDetailViewInterface: ViewInterface {
+    func setTitle(_ title: String)
     func reloadInterface()
 }
 
-protocol PostDetailPresenterInterface: PresenterInterface {}
+protocol PostDetailPresenterInterface: PresenterInterface {
+    func numberOfSections() -> Int
+    func numberOfItems(in section: Int) -> Int
+    func item(at section: Int, row: Int) -> MultiPurposeTableCellViewModelable
+}
 
 protocol PostDetailInteractorInputInterface: InteractorInterface {
     func getComments(for post: PostViewModelProtocol)

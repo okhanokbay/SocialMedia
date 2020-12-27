@@ -7,7 +7,13 @@
 
 import UIKit
 
-enum ImageName: String {
+enum ImageFactory: String {
     case disclosureIndicator = "DisclosureIndicator"
     case rightArrow = "RightArrow"
+    case profile = "Profile"
+    case comment = "Comment"
+    
+    var image: UIImage {
+        return UIImage(named: rawValue)!
+    }
 }
