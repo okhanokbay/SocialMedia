@@ -70,7 +70,7 @@ extension PostDataProvider {
         let taskGroup = DispatchGroup()
         
         taskGroup.enter()
-        apiLayer.getUsers { [weak self] result in
+        apiLayer.fetchUsers { [weak self] result in
             guard let self = self else { return }
             
             switch result {
@@ -85,7 +85,7 @@ extension PostDataProvider {
         }
         
         taskGroup.enter()
-        apiLayer.getPosts { [weak self] result in
+        apiLayer.fetchPosts { [weak self] result in
             guard let self = self else { return }
             
             switch result {

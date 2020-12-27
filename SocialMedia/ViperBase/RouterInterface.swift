@@ -35,7 +35,7 @@ extension BaseRouter {
     }
 
     func dismiss(animated: Bool) {
-        navigationController?.dismiss(animated: animated)
+        (navigationController ?? viewController)?.dismiss(animated: animated)
     }
 
     func showErrorAlert(with message: String) {

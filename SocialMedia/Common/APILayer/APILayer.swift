@@ -11,9 +11,9 @@ import Moya
 typealias ResponseHandler<ResponseType: Decodable> = (Result<ResponseType, APIError>) -> Void
 
 protocol APILayerInterface: AnyObject {
-    func getUsers(completion: @escaping ResponseHandler<[UserAPIResponse]>)
-    func getPosts(completion: @escaping ResponseHandler<[PostAPIResponse]>)
-    func getComments(commentRequest: CommentAPIRequest, completion: @escaping ResponseHandler<[CommentAPIResponse]>)
+    func fetchUsers(completion: @escaping ResponseHandler<[UserAPIResponse]>)
+    func fetchPosts(completion: @escaping ResponseHandler<[PostAPIResponse]>)
+    func fetchComments(commentRequest: CommentAPIRequest, completion: @escaping ResponseHandler<[CommentAPIResponse]>)
 }
 
 final class APILayer: APILayerInterface {
@@ -24,19 +24,19 @@ final class APILayer: APILayerInterface {
         self.apiResponseHandler = apiResponseHandler
     }
     
-    func getUsers(completion: @escaping ResponseHandler<[UserAPIResponse]>) {
+    func fetchUsers(completion: @escaping ResponseHandler<[UserAPIResponse]>) {
         socialMediaAPI.request(.users,
                                completion: apiResponseHandler.handleResponse(with: completion,
                                                                              responseType: [UserAPIResponse].self))
     }
     
-    func getPosts(completion: @escaping ResponseHandler<[PostAPIResponse]>) {
+    func fetchPosts(completion: @escaping ResponseHandler<[PostAPIResponse]>) {
         socialMediaAPI.request(.posts,
                                completion: apiResponseHandler.handleResponse(with: completion,
                                                                              responseType: [PostAPIResponse].self))
     }
     
-    func getComments(commentRequest: CommentAPIRequest, completion: @escaping ResponseHandler<[CommentAPIResponse]>) {
+    func fetchComments(commentRequest: CommentAPIRequest, completion: @escaping ResponseHandler<[CommentAPIResponse]>) {
         socialMediaAPI.request(.comments(postID: commentRequest.postID),
                                completion: apiResponseHandler.handleResponse(with: completion,
                                                                              responseType: [CommentAPIResponse].self))
