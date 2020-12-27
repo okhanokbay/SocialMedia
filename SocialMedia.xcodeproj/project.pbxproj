@@ -41,6 +41,8 @@
 		16699A34259888B100CED5EF /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16699A33259888B100CED5EF /* UserViewModel.swift */; };
 		1671A1642598EB78001722AE /* MultiPurposeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1671A1622598EB78001722AE /* MultiPurposeTableViewCell.xib */; };
 		1671A1652598EB78001722AE /* MultiPurposeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1671A1632598EB78001722AE /* MultiPurposeTableViewCell.swift */; };
+		1671A1CA25993B2E001722AE /* Posts.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 1671A1C825993B2E001722AE /* Posts.PNG */; };
+		1671A1CB25993B2E001722AE /* PostDetail.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 1671A1C925993B2E001722AE /* PostDetail.PNG */; };
 		16BB018F259752F800C2B48D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB018E259752F800C2B48D /* AppDelegate.swift */; };
 		16BB0191259752F800C2B48D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BB0190259752F800C2B48D /* SceneDelegate.swift */; };
 		16BB0199259752F800C2B48D /* SocialMedia.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 16BB0197259752F800C2B48D /* SocialMedia.xcdatamodeld */; };
@@ -124,6 +126,8 @@
 		16699A33259888B100CED5EF /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		1671A1622598EB78001722AE /* MultiPurposeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultiPurposeTableViewCell.xib; sourceTree = "<group>"; };
 		1671A1632598EB78001722AE /* MultiPurposeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiPurposeTableViewCell.swift; sourceTree = "<group>"; };
+		1671A1C825993B2E001722AE /* Posts.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Posts.PNG; sourceTree = "<group>"; };
+		1671A1C925993B2E001722AE /* PostDetail.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PostDetail.PNG; sourceTree = "<group>"; };
 		16BB018B259752F800C2B48D /* SocialMedia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialMedia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16BB018E259752F800C2B48D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		16BB0190259752F800C2B48D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -305,6 +309,8 @@
 			children = (
 				1621E8D22597721E004A117F /* COMMENTS.md */,
 				16BB02232597550200C2B48D /* .gitignore */,
+				1671A1C925993B2E001722AE /* PostDetail.PNG */,
+				1671A1C825993B2E001722AE /* Posts.PNG */,
 				16BB018D259752F800C2B48D /* SocialMedia */,
 				16BB01A7259752FA00C2B48D /* SocialMediaTests */,
 				16BB01B2259752FA00C2B48D /* SocialMediaUITests */,
@@ -569,7 +575,9 @@
 				16BB024C25975D8A00C2B48D /* PostDetailViewController.xib in Resources */,
 				16BB019E259752F900C2B48D /* LaunchScreen.storyboard in Resources */,
 				16BB019B259752F900C2B48D /* Assets.xcassets in Resources */,
+				1671A1CB25993B2E001722AE /* PostDetail.PNG in Resources */,
 				1671A1642598EB78001722AE /* MultiPurposeTableViewCell.xib in Resources */,
+				1671A1CA25993B2E001722AE /* Posts.PNG in Resources */,
 				1621E8D32597721E004A117F /* COMMENTS.md in Resources */,
 				16BB023A25975D7C00C2B48D /* PostsViewController.xib in Resources */,
 			);
