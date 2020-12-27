@@ -24,7 +24,6 @@ extension Comment {
 
 extension Comment: CommentViewModelProtocol {
     static func makeSelf(from comment: CommentViewModelProtocol,
-                         in post: Post,
                          context: NSManagedObjectContext) -> Comment {
         
         let managedComment = Comment(context: context)
@@ -34,7 +33,6 @@ extension Comment: CommentViewModelProtocol {
         managedComment.name = comment.name
         managedComment.email = comment.email
         managedComment.body = comment.body
-        managedComment.inPost = post
         
         return managedComment
     }

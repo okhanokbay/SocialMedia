@@ -57,7 +57,7 @@ extension Post: PostViewModelProtocol {
         managedPost.username = post.username
         
         managedPost.postComments = Set(post.comments.map { comment in
-            return Comment.makeSelf(from: comment, in: managedPost, context: context)
+            return Comment.makeSelf(from: comment, context: context)
         })
         
         return managedPost

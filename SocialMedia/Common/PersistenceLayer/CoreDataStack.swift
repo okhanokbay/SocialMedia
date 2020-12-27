@@ -85,13 +85,14 @@ extension CoreDataStack: PersistenceReadLayerInterface {
     }
     
     func fetchComments(for post: PostViewModelProtocol, completion: (([CommentViewModelProtocol]) -> Void)? = nil) {
-        let request = Post.createFetchRequest()
+        let request = Comment.createFetchRequest()
         let predicate = NSPredicate(format: "postID = %d", post.postID)
         request.predicate = predicate
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Comment.commentID, ascending: true)]
         
         persistentContainer.performBackgroundTask { backgroundContext in
-            let managedPost = try? backgroundContext.fetch(request).first
-            completion?(Array(managedPost?.postComments ?? []))
+            let managedComments = try? backgroundContext.fetch(request)
+            completion?(managedComments ?? [])
         }
     }
 }
@@ -109,18 +110,15 @@ extension CoreDataStack: PersistenceUpdateLayerInterface {
         
         persistentContainer.performBackgroundTask { backgroundContext in
             if let managedPost = try? backgroundContext.fetch(request).first {
-                let oldPost = Post.makeSelf(from: post, context: backgroundContext)
+                let newComments = Set(comments.map { Comment.makeSelf(from: $0, context: backgroundContext) })
+                managedPost.postComments = newComments
                 
-                managedPost.postComments = Set(comments.map { Comment.makeSelf(from: $0,
-                                                                       in: oldPost,
-                                                                       context: backgroundContext) })
                 completion?(true)
+                self.save(context: backgroundContext)
                 
             } else {
                 completion?(false)
             }
-            
-            self.save(context: backgroundContext)
         }
     }
 }
