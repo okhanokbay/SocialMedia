@@ -49,14 +49,16 @@ extension PostsPresenter: PostsPresenterInterface {
     
     func didSelectItem(at index: Int) {
         let dataProvider = interactor.getDataProvider()
-        let commentRequest = interactor.getCommentRequest(for: index)
-        router.navigateToPostDetail(with: dataProvider, commentRequest: commentRequest)
+        let post = interactor.getItem(at: index)
+        router.navigateToPostDetail(with: dataProvider, post: post)
     }
 }
 
 extension PostsPresenter: PostsInteractorOutputInterface {
     func postsReceived() {
-        view.hideProgressHUD()
-        view.reloadInterface()
+        DispatchQueue.main.async {
+            self.view.hideProgressHUD()
+            self.view.reloadInterface()
+        }
     }
 }

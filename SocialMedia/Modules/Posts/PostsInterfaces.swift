@@ -10,23 +10,8 @@
 
 import UIKit
 
-protocol PostsWireframeInterface: WireframeInterface {
-    static func assembleWireframe() -> PostsWireframe
-}
-
-protocol PostsRouterInterface: RouterInterface {
-    func navigateToPostDetail(with dataProvider: PostDataProviderInterface, commentRequest: CommentRequest)
-}
-
 protocol PostsViewInterface: ViewInterface {
     func reloadInterface()
-}
-
-protocol PostsPresenterInterface: PresenterInterface {
-    func numberOfItems() -> Int
-    func item(at index: Int) -> PostTableCellViewModelProtocol
-    
-    func didSelectItem(at index: Int)
 }
 
 protocol PostsInteractorInputInterface: InteractorInterface {
@@ -36,11 +21,25 @@ protocol PostsInteractorInputInterface: InteractorInterface {
     func getItem(at index: Int) -> PostViewModelProtocol
     
     func getDataProvider() -> PostDataProviderInterface
-    func getCommentRequest(for index: Int) -> CommentRequest
 }
 
 protocol PostsInteractorOutputInterface: InteractorInterface {
     func postsReceived()
+}
+
+protocol PostsPresenterInterface: PresenterInterface {
+    func numberOfItems() -> Int
+    func item(at index: Int) -> PostTableCellViewModelProtocol
+    
+    func didSelectItem(at index: Int)
+}
+
+protocol PostsRouterInterface: RouterInterface {
+    func navigateToPostDetail(with dataProvider: PostDataProviderInterface, post: PostViewModelProtocol)
+}
+
+protocol PostsWireframeInterface: WireframeInterface {
+    static func assembleWireframe() -> PostsWireframe
 }
 
 protocol PostTableCellViewModelProtocol {

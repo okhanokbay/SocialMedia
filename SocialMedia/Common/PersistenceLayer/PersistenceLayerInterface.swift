@@ -18,7 +18,7 @@ protocol PersistenceCreateLayerInterface: AnyObject {
 
 protocol PersistenceReadLayerInterface: AnyObject {
     func fetchPosts(completion: @escaping ([PostViewModelProtocol]) -> Void)
-    func fetchComments(for postID: Int, completion: (([CommentViewModelProtocol]) -> Void)?)
+    func fetchComments(for post: PostViewModelProtocol, completion: (([CommentViewModelProtocol]) -> Void)?)
 }
     
 protocol PersistenceUpdateLayerInterface: AnyObject {

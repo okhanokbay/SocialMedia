@@ -13,7 +13,7 @@ typealias ResponseHandler<ResponseType: Decodable> = (Result<ResponseType, APIEr
 protocol APILayerInterface: AnyObject {
     func fetchUsers(completion: @escaping ResponseHandler<[UserAPIResponse]>)
     func fetchPosts(completion: @escaping ResponseHandler<[PostAPIResponse]>)
-    func fetchComments(commentRequest: CommentRequest, completion: @escaping ResponseHandler<[CommentAPIResponse]>)
+    func fetchComments(for post: PostViewModelProtocol, completion: @escaping ResponseHandler<[CommentAPIResponse]>)
 }
 
 final class APILayer: APILayerInterface {
@@ -36,8 +36,8 @@ final class APILayer: APILayerInterface {
                                                                              responseType: [PostAPIResponse].self))
     }
     
-    func fetchComments(commentRequest: CommentRequest, completion: @escaping ResponseHandler<[CommentAPIResponse]>) {
-        socialMediaAPI.request(.comments(postID: commentRequest.postID),
+    func fetchComments(for post: PostViewModelProtocol, completion: @escaping ResponseHandler<[CommentAPIResponse]>) {
+        socialMediaAPI.request(.comments(postID: post.postID),
                                completion: apiResponseHandler.handleResponse(with: completion,
                                                                              responseType: [CommentAPIResponse].self))
     }

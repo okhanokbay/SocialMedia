@@ -82,9 +82,9 @@ extension CoreDataStack: PersistenceReadLayerInterface {
         }
     }
     
-    func fetchComments(for postID: Int, completion: (([CommentViewModelProtocol]) -> Void)? = nil) {
+    func fetchComments(for post: PostViewModelProtocol, completion: (([CommentViewModelProtocol]) -> Void)? = nil) {
         let request = Comment.createFetchRequest()
-        let predicate = NSPredicate(format: "postID = %@", postID)
+        let predicate = NSPredicate(format: "postID = %@", post.postID)
         request.predicate = predicate
         
         persistentContainer.performBackgroundTask { backgroundContext in

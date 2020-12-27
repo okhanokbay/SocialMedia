@@ -33,9 +33,7 @@ final class PostsViewController: UIViewController {
 
 extension PostsViewController: PostsViewInterface {
     func reloadInterface() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        tableView.reloadData()
     }
 }
 

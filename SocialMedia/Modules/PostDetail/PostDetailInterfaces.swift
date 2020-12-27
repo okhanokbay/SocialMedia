@@ -11,7 +11,7 @@
 import UIKit
 
 protocol PostDetailWireframeInterface: WireframeInterface {
-    static func assembleWireframe(with dataProvider: PostDataProviderInterface, commentRequest: CommentRequest) -> PostDetailWireframe
+    static func assembleWireframe(with dataProvider: PostDataProviderInterface, post: PostViewModelProtocol) -> PostDetailWireframe
 }
 
 protocol PostDetailRouterInterface: RouterInterface {
@@ -25,7 +25,7 @@ protocol PostDetailViewInterface: ViewInterface {
 protocol PostDetailPresenterInterface: PresenterInterface {}
 
 protocol PostDetailInteractorInputInterface: InteractorInterface {
-    func getComments(for commentRequest: CommentRequest)
+    func getComments(for post: PostViewModelProtocol)
 }
 
 protocol PostDetailInteractorOutputInterface: InteractorInterface {

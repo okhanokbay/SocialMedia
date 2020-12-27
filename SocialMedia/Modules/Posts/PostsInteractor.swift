@@ -39,9 +39,4 @@ extension PostsInteractor: PostsInteractorInputInterface {
     func getDataProvider() -> PostDataProviderInterface {
         return dataProvider
     }
-    
-    func getCommentRequest(for index: Int) -> CommentRequest {
-        let post = getItem(at: index)
-        return CommentRequest(postID: post.postID)
-    }
 }

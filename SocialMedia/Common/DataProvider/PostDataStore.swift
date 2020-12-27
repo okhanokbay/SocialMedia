@@ -13,6 +13,7 @@ protocol PostDataStoreProtocol: AnyObject {
     var users: [UserAPIResponse] { get set }
     
     var postViewModels: [PostViewModelProtocol] { get set }
+    var commentViewModels: [CommentViewModelProtocol] { get set }
 }
 
 final class PostDataStore: PostDataStoreProtocol {
@@ -21,4 +22,5 @@ final class PostDataStore: PostDataStoreProtocol {
     var users: [UserAPIResponse] = []
     
     var postViewModels: [PostViewModelProtocol] = []
+    var commentViewModels: [CommentViewModelProtocol] = []
 }

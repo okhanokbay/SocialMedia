@@ -11,7 +11,7 @@ typealias PostDataProviderCompletion<T> = ([T]) -> Void
 
 protocol PostDataProviderInterface: AnyObject {
     func fetchPosts(completion: @escaping PostDataProviderCompletion<PostViewModelProtocol>)
-    func fetchComments(for commentRequest: CommentRequest, completion: @escaping PostDataProviderCompletion<CommentViewModelProtocol>)
+    func fetchComments(for post: PostViewModelProtocol, completion: @escaping PostDataProviderCompletion<CommentViewModelProtocol>)
     
     var currentPosts: [PostViewModelProtocol] { get }
 }
@@ -49,12 +49,19 @@ extension PostDataProvider {
         persistenceLayer.fetchPosts { [weak self] localPosts in
             guard let self = self else { return }
             
-            if localPosts.count == 0 {
-                self.fetchPostsFromAPI { remotePosts in
-                    completion(remotePosts)
-                }
-            } else {
+            guard localPosts.count == 0 else {
+                self.dataStore.postViewModels = localPosts
                 completion(localPosts)
+                return
+            }
+            
+            self.fetchPostsFromAPI { remotePosts in
+                self.dataStore.postViewModels = remotePosts
+                completion(remotePosts)
+                
+                self.persistenceLayer.save(posts: remotePosts) { isSuccess in
+                    print("Remote posts \(isSuccess ? "successfully" : "could not be") saved into local warehouse")
+                }
             }
         }
     }
@@ -120,20 +127,44 @@ extension PostDataProvider {
                 return PostViewModel(with: post, user: UserViewModel(with: user), comments: [])
             }
             
-            self.dataStore.postViewModels = postViewModels
             completion(postViewModels)
         }
     }
 }
 
 extension PostDataProvider {
-    func fetchComments(for commentRequest: CommentRequest, completion: @escaping PostDataProviderCompletion<CommentViewModelProtocol>) {
-        apiLayer.fetchComments(commentRequest: commentRequest) { [weak self] result in
+    func fetchComments(for post: PostViewModelProtocol,
+                       completion: @escaping PostDataProviderCompletion<CommentViewModelProtocol>) {
+        
+        persistenceLayer.fetchComments(for: post) { [weak self] localComments in
+            guard let self = self else { return }
+            
+            guard localComments.count == 0 else {
+                self.dataStore.commentViewModels = localComments
+                completion(localComments)
+                return
+            }
+            
+            self.fetchCommentsFromAPI(for: post) { remoteComments in
+                self.dataStore.commentViewModels = remoteComments
+                completion(remoteComments)
+                
+                self.persistenceLayer.update(post: post, with: remoteComments) { isSuccess in
+                    print("Remote comments \(isSuccess ? "successfully" : "could not be") saved into local warehouse")
+                }
+            }
+        }
+    }
+    
+    private func fetchCommentsFromAPI(for post: PostViewModelProtocol,
+                                      completion: @escaping PostDataProviderCompletion<CommentViewModelProtocol>) {
+        
+        apiLayer.fetchComments(for: post) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
             case .success(let comments):
-                print(comments)
+                completion(comments.map(CommentViewModel.init))
                 
             case .failure(let error):
                 self.apiErrorHandler.handleError(error)
