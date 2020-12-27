@@ -43,7 +43,9 @@ extension BaseRouter {
                                             message: message,
                                             buttonText: Strings.Alert.okay.rawValue)
 
-        (navigationController ?? viewController)?.present(alertViewModel.alertController, animated: true, completion: nil)
+        (navigationController ?? viewController)?.present(alertViewModel.alertController,
+                                                          animated: true,
+                                                          completion: nil)
     }
 
     func showAlert(with title: String, message: String) {
@@ -51,6 +53,8 @@ extension BaseRouter {
                                             message: message,
                                             buttonText: Strings.Alert.okay.rawValue)
 
-        (navigationController ?? viewController)?.present(alertViewModel.alertController, animated: true, completion: nil)
+        (navigationController ?? viewController)?.present(alertViewModel.alertController,
+                                                          animated: true,
+                                                          completion: nil)
     }
 }

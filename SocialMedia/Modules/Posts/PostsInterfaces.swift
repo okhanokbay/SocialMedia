@@ -17,11 +17,10 @@ protocol PostsViewInterface: ViewInterface {
 
 protocol PostsInteractorInputInterface: InteractorInterface {
     func getPosts()
-
-    func getNumberOfItems() -> Int
-    func getItem(at index: Int) -> PostViewModelProtocol
-
     func getDataProvider() -> PostDataProviderInterface
+
+    func numberOfItems() -> Int
+    func item(at index: Int) -> PostViewModelProtocol
 }
 
 protocol PostsInteractorOutputInterface: InteractorInterface {

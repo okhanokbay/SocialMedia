@@ -53,7 +53,7 @@ extension PostDataProvider {
                 return
             }
 
-            guard localPosts.count == 0 else {
+            guard localPosts.isEmpty else {
                 self.dataStore.postViewModels = localPosts
                 completion(localPosts)
                 debugPrint("Using posts from local warehouse")
@@ -158,7 +158,7 @@ extension PostDataProvider {
                 return
             }
 
-            guard localComments.count == 0 else {
+            guard localComments.isEmpty else {
                 self.dataStore.commentViewModels = localComments
                 completion(localComments)
                 debugPrint("Using comments from local warehouse")
@@ -171,7 +171,8 @@ extension PostDataProvider {
                 debugPrint("Using comments from remote server")
 
                 self.persistenceLayer.update(post: post, with: remoteComments) { isSuccess in
-                    debugPrint("Remote comments \(isSuccess ? "successfully" : "could not be") saved into local warehouse")
+                    let middleText = isSuccess ? "successfully" : "could not be"
+                    debugPrint("Remote comments \(middleText) saved into local warehouse")
                 }
             }
         }

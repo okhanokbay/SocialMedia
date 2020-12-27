@@ -30,15 +30,15 @@ extension PostsInteractor: PostsInteractorInputInterface {
         }
     }
 
-    func getNumberOfItems() -> Int {
+    func getDataProvider() -> PostDataProviderInterface {
+        return dataProvider
+    }
+
+    func numberOfItems() -> Int {
         return dataProvider.currentPosts.count
     }
 
-    func getItem(at index: Int) -> PostViewModelProtocol {
+    func item(at index: Int) -> PostViewModelProtocol {
         return dataProvider.currentPosts[index]
-    }
-
-    func getDataProvider() -> PostDataProviderInterface {
-        return dataProvider
     }
 }

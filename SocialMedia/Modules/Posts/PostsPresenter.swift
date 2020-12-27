@@ -45,7 +45,7 @@ extension PostsPresenter: PostsPresenterInterface {
     }
 
     func numberOfItems() -> Int {
-        return interactor.getNumberOfItems()
+        return interactor.numberOfItems()
     }
 
     func item(at index: Int) -> MultiPurposeTableCellViewModelable {
@@ -54,7 +54,7 @@ extension PostsPresenter: PostsPresenterInterface {
 
     func didSelectItem(at index: Int) {
         let dataProvider = interactor.getDataProvider()
-        let post = interactor.getItem(at: index)
+        let post = interactor.item(at: index)
 
         DispatchQueue.main.async {
             self.router.navigateToPostDetail(with: dataProvider, post: post)
