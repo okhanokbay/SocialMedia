@@ -23,7 +23,11 @@ final class PostsInteractor {
 
 extension PostsInteractor: PostsInteractorInputInterface {
     func getPosts() {
-        DispatchQueue.global(qos: .userInitiated).async {
+        getPosts(on: DispatchQueue.global(qos: .userInitiated))
+    }
+
+    func getPosts(on queue: DispatchQueueType) {
+        queue.async {
             self.dataProvider.fetchPosts(completion: { [weak self] posts in
                 self?.output.postsReceived(posts)
             })

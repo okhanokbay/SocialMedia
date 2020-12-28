@@ -23,4 +23,10 @@ struct UserViewModel: UserViewModelProtocol {
         name = userAPIResponse.name
         username = userAPIResponse.username
     }
+
+    init(userID: Int, name: String, username: String) {
+        self.userID = userID
+        self.name = name
+        self.username = username
+    }
 }

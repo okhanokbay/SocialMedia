@@ -18,7 +18,7 @@ final class PostsPresenter {
     private let interactor: PostsInteractorInputInterface
     private let router: PostsRouterInterface
 
-    private var cellViewModels: [MultiPurposeTableCellViewModel] = []
+    private(set) var cellViewModels: [MultiPurposeTableCellViewModel] = []
 
     // MARK: - Lifecycle -
 
@@ -36,7 +36,11 @@ final class PostsPresenter {
 
 extension PostsPresenter: PostsPresenterInterface {
     func viewDidLoad() {
-        DispatchQueue.main.async {
+        viewDidLoad(on: DispatchQueue.main)
+    }
+
+    func viewDidLoad(on queue: DispatchQueueType) {
+        queue.async {
             self.view.setTitle(Strings.Post.title.rawValue)
             self.view.showProgressHUD()
         }
