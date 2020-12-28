@@ -22,6 +22,6 @@ final class APIErrorHandler: APIErrorHandlerInterface {
             .windows
             .first { $0.isKeyWindow }?
             .rootViewController?
-            .show(alertViewModel.alertController, sender: nil)
+            .present(alertViewModel.alertController, animated: true, completion: nil)
     }
 }
