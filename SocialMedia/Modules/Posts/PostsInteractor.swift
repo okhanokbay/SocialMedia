@@ -13,7 +13,7 @@ import Foundation
 final class PostsInteractor {
 
     // MARK: - Properties -
-    
+
     private let dataProvider: PostDataProviderInterface
     weak var output: PostsInteractorOutputInterface!
 
