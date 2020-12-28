@@ -8,7 +8,7 @@ These 3 are getting together in PostDataProvider and that class' only responsibi
 
 O -> Providing a PersistenceLayerInterface for local data CRUD operations
 
-L -> It's hard to point a direct example of this, because I tried to follow Protocol Oriented Programming(POP) way of thinking, mostly. So, there are not much subtypes that can be a problematic for their super types just by inheriting them and altering their way of work. AFAIK, Interface Segregation and POP leads you to a place where you hardly face a Liskov Substitution kind of problem.
+L -> AFAIK, Interface Segregation and POP leads you to a place where you hardly face a Liskov Substitution kind of problem. Also you have to be careful about it.
 
 I -> by using different interfaces for PersistenceLayer's CRUD Operations -> PersistenceCreateLayer, PersistenceReadLayer, PersistenceUpdateLayer
 
