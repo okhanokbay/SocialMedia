@@ -52,3 +52,5 @@ Protocols -the ones that feels more like an interface- suffixed with Interface k
 Localization can be easliy added by using Strings.swift file.
 
 Not used NSFetchedResultsController for Core Data. If I would, it would be very hard to isolate all the logic inside the CoreDataStack class. 
+
+Spared 2 days as it is requested in the project requirements
