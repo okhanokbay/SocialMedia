@@ -83,10 +83,7 @@ extension CoreDataStack: PersistenceReadLayerInterface {
     func fetchPosts(completion: @escaping ([PostViewModelProtocol]) -> Void) {
         let request = Post.createFetchRequest()
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Post.postID, ascending: true)]
-
-        persistentContainer.performBackgroundTask { backgroundContext in
-            completion((try? backgroundContext.fetch(request)) ?? [])
-        }
+        completion((try? self.persistentContainer.viewContext.fetch(request)) ?? [])
     }
 
     func fetchComments(for post: PostViewModelProtocol, completion: (([CommentViewModelProtocol]) -> Void)? = nil) {
