@@ -66,7 +66,7 @@ extension PostsPresenter: PostsPresenterInterface {
     }
 }
 
-// MARK: - OutpurInterface -
+// MARK: - OutputInterface -
 
 extension PostsPresenter: PostsInteractorOutputInterface {
     func postsReceived(_ posts: [PostViewModelProtocol]) {

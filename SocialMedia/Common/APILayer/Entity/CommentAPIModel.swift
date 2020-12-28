@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CommentAPIResponse: Decodable, Hashable {
+struct CommentAPIResponse: Decodable {
     let postID: Int
     let commentID: Int
     let name: String

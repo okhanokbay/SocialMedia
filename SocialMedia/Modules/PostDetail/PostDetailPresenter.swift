@@ -92,7 +92,7 @@ extension PostDetailPresenter: PostDetailInteractorOutputInterface {
     private func makeCells(from comments: [CommentViewModelProtocol]) {
         var viewModels: [MultiPurposeTableCellViewModelable] = []
 
-        if comments.count == 0 {
+        if comments.isEmpty {
             let noCommentCellViewModel = MultiPurposeTableCellViewModel(firstText: Strings.Post.noComment.rawValue)
             viewModels.append(noCommentCellViewModel)
 

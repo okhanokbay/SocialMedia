@@ -86,10 +86,8 @@ extension PostDataProvider {
 
     private func fetchUsersCompletionHandler(taskGroup: DispatchGroup) -> (ResponseHandler<[UserAPIResponse]>) {
         return { [weak self] result in
-            guard let self = self else {
-                taskGroup.leave()
-                return
-            }
+            defer { taskGroup.leave() }
+            guard let self = self else { return }
 
             switch result {
             case .success(let users):
@@ -98,17 +96,13 @@ extension PostDataProvider {
             case .failure(let error):
                 self.apiErrorHandler.handleError(error)
             }
-
-            taskGroup.leave()
         }
     }
 
     private func fetchPostsCompletionHandler(taskGroup: DispatchGroup) -> (ResponseHandler<[PostAPIResponse]>) {
         return { [weak self] result in
-            guard let self = self else {
-                taskGroup.leave()
-                return
-            }
+            defer { taskGroup.leave() }
+            guard let self = self else { return }
 
             switch result {
             case .success(let posts):
@@ -117,8 +111,6 @@ extension PostDataProvider {
             case .failure(let error):
                 self.apiErrorHandler.handleError(error)
             }
-
-            taskGroup.leave()
         }
     }
 

@@ -92,16 +92,12 @@ final class MultiPurposeTableViewCell: UITableViewCell {
 
 extension MultiPurposeTableViewCell {
     private func setupLeftImage(with viewModel: MultiPurposeTableCellViewModelable) {
-        if let leftImage = viewModel.leftImage {
-            leftImageView.image = leftImage
-            imageContainerView.isHidden = false
-
-        } else {
-            imageContainerView.isHidden = true
-        }
+        leftImageView.image = viewModel.leftImage
+        imageContainerView.isHidden = viewModel.leftImage == nil
     }
 
     private func setupLabels(with viewModel: MultiPurposeTableCellViewModelable) {
+        // Not using if let here to check because it is different than setting an image to imageview
         firstLabel.text = viewModel.firstText
 
         secondLabel.text = viewModel.secondText
@@ -121,10 +117,8 @@ extension MultiPurposeTableViewCell {
             case .arrow:
                 rightImageView.image = ImageFactory.rightArrow.image
             }
-
-            rightContainerView.isHidden = false
-        } else {
-            rightContainerView.isHidden = true
         }
+
+        rightContainerView.isHidden = viewModel.disclosureIndicatorType == nil
     }
 }
